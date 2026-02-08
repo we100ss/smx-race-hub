@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMX — 2026 Supercross Race Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07080a;--bg2:#0d0e12;--bg3:#12141a;--bg4:#181a22;--brd:#1a1c24;--brd2:#252830;--t:#ecedf0;--t2:#9395a0;--t3:#5a5c68;--t4:#3a3c44;--grn:#6cff00;--grn2:rgba(108,255,0,.08);--red:#ff2244;--red2:rgba(255,34,68,.08);--yel:#ffd500;--yel2:rgba(255,213,0,.08);--blu:#3388ff;--ora:#ff8800;--cyn:#00ddc6;--ktm:#ff6b00;--hon:#cc0000;--yam:#0055d4;--kaw:#00a033;--suz:#ffd200;--husq:#bbb;--duc:#cc0000}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:3px}
+
+.wrap{max-width:700px;margin:0 auto;padding:0 16px 80px;position:relative;z-index:1}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:100;padding:12px 16px;border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;background:rgba(7,8,10,.94);backdrop-filter:blur(16px)}
+.hdr::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--grn),var(--yel),var(--red))}
+.logo{font-family:'Oswald';font-weight:700;font-size:18px;letter-spacing:-0.5px}.logo span{color:var(--grn)}
+.hdr-meta{font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;color:var(--t3);text-transform:uppercase}
+
+/* NAV — bottom fixed on mobile */
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(7,8,10,.96);backdrop-filter:blur(16px);border-top:1px solid var(--brd);padding:6px 0 env(safe-area-inset-bottom,6px)}
+.nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;background:none;border:none;cursor:pointer;color:var(--t3);transition:color .15s}
+.nav-btn.active{color:var(--grn)}
+.nav-btn .ico{font-size:18px}
+.nav-btn .lbl{font-family:'Barlow Condensed';font-size:9px;letter-spacing:1px;text-transform:uppercase}
+
+/* PANELS */
+.panel{display:none}.panel.active{display:block}
+
+/* CLASS TOGGLE */
+.cls-tog{display:flex;gap:2px;padding:3px;background:var(--bg2);border:1px solid var(--brd);border-radius:6px;width:fit-content;margin:16px 0 12px}
+.cls-b{font-family:'Oswald';font-weight:500;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:4px;cursor:pointer;color:var(--t3);border:none;background:transparent;transition:all .15s}
+.cls-b.active.c4{background:var(--grn);color:#0a0a0c;font-weight:600}
+.cls-b.active.c2{background:var(--yel);color:#0a0a0c;font-weight:600}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--brd);border-radius:8px;overflow:hidden;margin-bottom:12px}
+.card-h{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--brd)}
+.card-t{font-family:'Oswald';font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase}
+.card-s{font-family:'Barlow';font-size:10px;color:var(--t3)}
+.tag{font-family:'Oswald';font-size:9px;letter-spacing:1.2px;text-transform:uppercase;padding:3px 7px;border-radius:3px;font-weight:500}
+.tag-g{background:var(--grn2);color:var(--grn)}.tag-r{background:var(--red2);color:var(--red)}.tag-y{background:var(--yel2);color:var(--yel)}
+
+/* HERO CARD */
+.hero{background:var(--bg2);border:1px solid var(--brd);border-radius:10px;overflow:hidden;margin-bottom:14px;position:relative}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.hero.h4::before{background:var(--grn)}.hero.h2::before{background:var(--yel)}
+.hero-inner{padding:20px 16px 16px}
+.hero-label{font-family:'Barlow Condensed';font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.hero-name{font-family:'Oswald';font-weight:700;font-size:32px;line-height:1.1;margin-bottom:2px}
+.hero-sub{font-family:'Barlow';font-size:13px;color:var(--t2);margin-bottom:12px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.hero-stat{background:var(--bg3);border-radius:6px;padding:10px 8px;text-align:center}
+.hero-stat .val{font-family:'Oswald';font-weight:700;font-size:20px}
+.hero-stat .lbl{font-family:'Barlow Condensed';font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-top:2px}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{font-family:'Barlow Condensed';font-weight:500;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t3);padding:7px 8px;text-align:left;border-bottom:1px solid var(--brd)}
+.tbl td{padding:6px 8px;font-family:'Barlow';font-size:12px;border-bottom:1px solid rgba(255,255,255,.02)}
+.tbl td:first-child{font-family:'Oswald';font-weight:600;font-size:12px;color:var(--t3);width:28px}
+.tbl tr:hover{background:var(--bg3)}
+.tbl .top td:first-child{color:var(--grn)}
+.mn{font-family:'JetBrains Mono';font-size:10px}
+.bd{display:inline-block;width:3px;height:12px;border-radius:2px;margin-right:4px;vertical-align:middle}
+
+/* SUB TABS inside cards */
+.stabs{display:flex;gap:0;border-bottom:1px solid var(--brd)}
+.stab{font-family:'Barlow Condensed';font-size:11px;letter-spacing:.5px;padding:8px 14px;cursor:pointer;color:var(--t3);border:none;background:none;border-bottom:2px solid transparent;transition:all .12s}
+.stab.active{color:var(--grn);border-bottom-color:var(--grn)}
+.stab.y.active{color:var(--yel);border-bottom-color:var(--yel)}
+.spanel{display:none}.spanel.active{display:block}
+
+/* ROUND SELECTOR */
+.rsel{display:flex;gap:4px;overflow-x:auto;padding:12px 0 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rsel::-webkit-scrollbar{display:none}
+.rb{font-family:'Oswald';font-size:10px;letter-spacing:.8px;padding:5px 10px;border-radius:4px;border:1px solid var(--brd);background:var(--bg2);color:var(--t3);cursor:pointer;white-space:nowrap;transition:all .12s}
+.rb.active{background:var(--grn);color:#0a0a0c;border-color:var(--grn);font-weight:600}
+.rb.now{border-color:var(--grn);color:var(--grn)}
+.rb.fut{color:var(--t4);border-color:rgba(255,255,255,.04)}
+.rd-p{display:none}.rd-p.active{display:block}
+
+/* BARS */
+.bar-wrap{padding:12px 14px}
+.bar-item{margin-bottom:6px}
+.bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
+.bar-name{font-family:'Barlow';font-weight:500;font-size:11px}
+.bar-pts{font-family:'JetBrains Mono';font-size:10px;font-weight:600}
+.bar-track{height:18px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;width:0;transition:width 1s cubic-bezier(.22,1,.36,1)}
+
+/* SCHEDULE ROW */
+.sched-row{display:grid;grid-template-columns:28px 1fr 80px;align-items:center;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.02);font-size:12px}
+.sched-row:hover{background:var(--bg3)}
+.sched-rd{font-family:'Oswald';font-weight:600;font-size:12px;color:var(--t3)}
+.sched-row.done .sched-rd{color:var(--grn)}
+.sched-row.now{background:var(--grn2);border-left:3px solid var(--grn)}
+.sched-city{font-family:'Barlow';font-weight:500}
+.sched-date{font-family:'JetBrains Mono';font-size:10px;color:var(--t3);text-align:right}
+
+/* TRACK MAP */
+.map-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:12px 14px}
+.map-grid img{width:100%;border-radius:4px;border:1px solid var(--brd);cursor:pointer}
+
+/* NEWS */
+.news-i{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.02)}
+.news-i:last-child{border-bottom:none}
+.news-src{font-family:'Barlow Condensed';font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:2px}
+.news-hl{font-family:'Barlow';font-weight:600;font-size:13px;margin-bottom:3px}
+.news-sub{font-family:'Barlow';font-size:11px;color:var(--t2);line-height:1.5}
+
+/* INJURY */
+.inj{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.02);font-size:12px}
+.inj-n{font-weight:600}.inj-d{font-size:10px;color:var(--t3)}
+.inj-s{font-family:'Oswald';font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px}
+.inj-out{background:var(--red2);color:var(--red)}.inj-ok{background:var(--grn2);color:var(--grn)}
+
+/* FOOTER */
+.foot{text-align:center;padding:20px 0 40px}
+.foot a{font-family:'Barlow Condensed';font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);text-decoration:none;transition:color .2s}
+.foot a:hover{color:var(--grn)}
+
+@media(min-width:768px){
+  .wrap{max-width:900px;padding:0 24px 60px}
+  .nav{position:static;border-top:none;border-bottom:1px solid var(--brd);padding:0;margin-bottom:16px;justify-content:center;gap:4px;background:transparent;backdrop-filter:none}
+  .nav-btn{flex:none;flex-direction:row;gap:6px;padding:10px 20px;border-bottom:2px solid transparent;border-radius:0}
+  .nav-btn.active{border-bottom-color:var(--grn);color:var(--grn)}
+  .nav-btn .ico{font-size:14px}
+  .nav-btn .lbl{font-size:11px}
+  body{padding-bottom:0}
+  .hero-name{font-size:40px}
+  .hero-stats{grid-template-columns:repeat(4,1fr)}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .map-grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="logo">SMX<span>HUB</span></div>
+  <div class="hdr-meta">Round 5 &middot; Glendale &middot; Feb 7</div>
+</div>
+
+<div class="wrap">
+
+<!-- BOTTOM NAV -->
+<nav class="nav">
+  <button class="nav-btn active" onclick="go('results')"><span class="ico">🏁</span><span class="lbl">Results</span></button>
+  <button class="nav-btn" onclick="go('standings')"><span class="ico">📊</span><span class="lbl">Standings</span></button>
+  <button class="nav-btn" onclick="go('archive')"><span class="ico">📁</span><span class="lbl">Archive</span></button>
+  <button class="nav-btn" onclick="go('schedule')"><span class="ico">📅</span><span class="lbl">Schedule</span></button>
+  <button class="nav-btn" onclick="go('news')"><span class="ico">📰</span><span class="lbl">News</span></button>
+</nav>
+
+<!-- ============ RESULTS ============ -->
+<div class="panel active" id="p-results">
+
+  <div class="cls-tog">
+    <button class="cls-b c4 active" onclick="setCls('4')">450SX</button>
+    <button class="cls-b c2" onclick="setCls('2')">250SX</button>
+  </div>
+
+  <!-- 450 HERO -->
+  <div class="show4">
+    <div class="hero h4">
+      <div class="hero-inner">
+        <div class="hero-label">450SX Main Event Winner — Round 5 Glendale</div>
+        <div class="hero-name"><span class="bd" style="background:var(--suz)"></span>Ken Roczen</div>
+        <div class="hero-sub">Progressive Insurance Suzuki &middot; Friese holeshot &middot; 23 laps</div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="val" style="color:var(--grn)">56.700</div><div class="lbl">Best Lap</div></div>
+          <div class="hero-stat"><div class="val">21:48</div><div class="lbl">Race Time</div></div>
+          <div class="hero-stat"><div class="val">+3.3s</div><div class="lbl">Win Margin</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-tabs: Main / Heats / Qualifying -->
+    <div class="card">
+      <div class="stabs">
+        <button class="stab active" onclick="stab(this,'s4-main')">Main Event</button>
+        <button class="stab" onclick="stab(this,'s4-heat')">Heats</button>
+        <button class="stab" onclick="stab(this,'s4-qual')">Qualifying</button>
+      </div>
+
+      <!-- 450 MAIN -->
+      <div class="spanel active" id="s4-main">
+        <table class="tbl"><thead><tr><th>P</th><th>Rider</th><th style="text-align:right">Best Lap</th><th style="text-align:right">Gap</th></tr></thead><tbody>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--suz)"></span>Ken Roczen</td><td class="mn" style="text-align:right;color:var(--grn)">56.700</td><td style="text-align:right">—</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--hon)"></span>Hunter Lawrence</td><td class="mn" style="text-align:right">57.324</td><td class="mn" style="text-align:right">+3.324</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--yam)"></span>Cooper Webb</td><td class="mn" style="text-align:right">57.506</td><td class="mn" style="text-align:right">+16.749</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Justin Cooper</td><td class="mn" style="text-align:right">57.837</td><td class="mn" style="text-align:right">+19.500</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--ktm)"></span>Jorge Prado</td><td class="mn" style="text-align:right">57.675</td><td class="mn" style="text-align:right">+25.953</td></tr>
+        <tr><td>6</td><td><span class="bd" style="background:var(--hon)"></span>Joey Savatgy</td><td class="mn" style="text-align:right">58.125</td><td class="mn" style="text-align:right">+27.204</td></tr>
+        <tr><td>7</td><td><span class="bd" style="background:var(--kaw)"></span>Chase Sexton</td><td class="mn" style="text-align:right">58.190</td><td class="mn" style="text-align:right">+31.296</td></tr>
+        <tr><td>8</td><td><span class="bd" style="background:var(--ktm)"></span>Aaron Plessinger</td><td class="mn" style="text-align:right">57.839</td><td class="mn" style="text-align:right">+35.142</td></tr>
+        <tr><td>9</td><td><span class="bd" style="background:var(--duc)"></span>Dylan Ferrandis</td><td class="mn" style="text-align:right">58.441</td><td class="mn" style="text-align:right">+39.563</td></tr>
+        <tr><td>10</td><td><span class="bd" style="background:var(--ktm)"></span>Justin Hill</td><td class="mn" style="text-align:right">58.766</td><td class="mn" style="text-align:right">+46.384</td></tr>
+        <tr><td>11</td><td><span class="bd" style="background:var(--suz)"></span>Jason Anderson</td><td class="mn" style="text-align:right">58.408</td><td class="mn" style="text-align:right">+50.190</td></tr>
+        <tr><td>12</td><td><span class="bd" style="background:var(--ktm)"></span>Eli Tomac</td><td class="mn" style="text-align:right">57.939</td><td class="mn" style="text-align:right">+52.800</td></tr>
+        <tr><td>13</td><td><span class="bd" style="background:var(--kaw)"></span>Garrett Marchbanks</td><td class="mn" style="text-align:right">58.872</td><td class="mn" style="text-align:right">+1:01</td></tr>
+        <tr><td>14</td><td><span class="bd" style="background:var(--hon)"></span>Christian Craig</td><td class="mn" style="text-align:right">59.402</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
+        <tr><td>15</td><td><span class="bd" style="background:var(--hon)"></span>Shane McElrath</td><td class="mn" style="text-align:right">59.326</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
+        <tr><td>16</td><td><span class="bd" style="background:var(--suz)"></span>Colt Nichols</td><td class="mn" style="text-align:right">59.312</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
+        <tr><td>17</td><td><span class="bd" style="background:var(--kaw)"></span>Vince Friese</td><td class="mn" style="text-align:right">1:00.002</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
+        <tr><td>18</td><td><span class="bd" style="background:var(--yam)"></span>Freddie Noren</td><td class="mn" style="text-align:right">1:00.365</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
+        <tr><td>19</td><td><span class="bd" style="background:var(--kaw)"></span>Mitchell Harrison</td><td class="mn" style="text-align:right">1:00.578</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
+        <tr><td>20</td><td><span class="bd" style="background:var(--ktm)"></span>Grant Harlan</td><td class="mn" style="text-align:right">1:00.789</td><td class="mn" style="text-align:right;color:var(--red)">2 Laps</td></tr>
+        <tr><td>21</td><td><span class="bd" style="background:var(--kaw)"></span>Josh Cartwright</td><td class="mn" style="text-align:right">1:01.555</td><td class="mn" style="text-align:right;color:var(--red)">2 Laps</td></tr>
+        <tr><td>22</td><td><span class="bd" style="background:var(--husq)"></span>Malcolm Stewart</td><td class="mn" style="text-align:right">58.160</td><td class="mn" style="text-align:right;color:var(--red)">13 Laps</td></tr>
+        </tbody></table>
+      </div>
+
+      <!-- 450 HEATS -->
+      <div class="spanel" id="s4-heat">
+        <div class="card-h"><div class="card-t">Heat 1 — Tomac Win</div></div>
+        <table class="tbl"><thead><tr><th>P</th><th>Rider</th><th style="text-align:right">Gap</th></tr></thead><tbody>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--ktm)"></span>Eli Tomac</td><td style="text-align:right">—</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--suz)"></span>Ken Roczen</td><td class="mn" style="text-align:right">+3.142</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--kaw)"></span>Chase Sexton</td><td class="mn" style="text-align:right">+4.571</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Cooper Webb</td><td class="mn" style="text-align:right">+5.893</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--hon)"></span>Joey Savatgy</td><td class="mn" style="text-align:right">+8.212</td></tr>
+        </tbody></table>
+        <div class="card-h" style="margin-top:8px"><div class="card-t">Heat 2 — Prado Win</div></div>
+        <table class="tbl"><thead><tr><th>P</th><th>Rider</th><th style="text-align:right">Gap</th></tr></thead><tbody>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--ktm)"></span>Jorge Prado</td><td style="text-align:right">—</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--hon)"></span>Hunter Lawrence</td><td class="mn" style="text-align:right">+2.891</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--suz)"></span>Jason Anderson</td><td class="mn" style="text-align:right">+6.344</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Justin Cooper</td><td class="mn" style="text-align:right">+8.102</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--ktm)"></span>Aaron Plessinger</td><td class="mn" style="text-align:right">+10.567</td></tr>
+        </tbody></table>
+      </div>
+
+      <!-- 450 QUALIFYING -->
+      <div class="spanel" id="s4-qual">
+        <table class="tbl"><thead><tr><th>P</th><th>Rider</th><th style="text-align:right">Time</th></tr></thead><tbody>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--ktm)"></span>Jorge Prado</td><td class="mn" style="text-align:right;color:var(--grn)">56.451</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--ktm)"></span>Eli Tomac</td><td class="mn" style="text-align:right">56.460</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--suz)"></span>Ken Roczen</td><td class="mn" style="text-align:right">56.714</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--hon)"></span>Hunter Lawrence</td><td class="mn" style="text-align:right">56.858</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--kaw)"></span>Chase Sexton</td><td class="mn" style="text-align:right">56.904</td></tr>
+        <tr><td>6</td><td><span class="bd" style="background:var(--yam)"></span>Cooper Webb</td><td class="mn" style="text-align:right">57.102</td></tr>
+        <tr><td>7</td><td><span class="bd" style="background:var(--suz)"></span>Jason Anderson</td><td class="mn" style="text-align:right">57.210</td></tr>
+        <tr><td>8</td><td><span class="bd" style="background:var(--yam)"></span>Justin Cooper</td><td class="mn" style="text-align:right">57.344</td></tr>
+        <tr><td>9</td><td><span class="bd" style="background:var(--ktm)"></span>Aaron Plessinger</td><td class="mn" style="text-align:right">57.498</td></tr>
+        <tr><td>10</td><td><span class="bd" style="background:var(--hon)"></span>Joey Savatgy</td><td class="mn" style="text-align:right">57.612</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+
+  <!-- 250 HERO -->
+  <div class="show2" style="display:none">
+    <div class="hero h2">
+      <div class="hero-inner">
+        <div class="hero-label">250SX West Main Event Winner — Round 5 Glendale</div>
+        <div class="hero-name" style="color:var(--yel)"><span class="bd" style="background:var(--yam)"></span>Haiden Deegan</div>
+        <div class="hero-sub">Monster Energy Yamaha &middot; Holeshot &middot; 4th consecutive win &middot; 17 laps</div>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="val" style="color:var(--yel)">58.111</div><div class="lbl">Best Lap</div></div>
+          <div class="hero-stat"><div class="val">16:23</div><div class="lbl">Race Time</div></div>
+          <div class="hero-stat"><div class="val">+4.1s</div><div class="lbl">Win Margin</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="stabs">
+        <button class="stab y active" onclick="stab(this,'s2-main')">Main Event</button>
+        <button class="stab y" onclick="stab(this,'s2-heat')">Heats</button>
+        <button class="stab y" onclick="stab(this,'s2-qual')">Qualifying</button>
+      </div>
+
+      <div class="spanel active" id="s2-main">
+        <table class="tbl"><thead><tr><th>P</th><th>Rider</th><th style="text-align:right">Best Lap</th><th style="text-align:right">Gap</th></tr></thead><tbody>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Haiden Deegan</td><td class="mn" style="text-align:right;color:var(--yel)">58.111</td><td style="text-align:right">—</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--kaw)"></span>Levi Kitchen</td><td class="mn" style="text-align:right">58.255</td><td class="mn" style="text-align:right">+4.156</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--kaw)"></span>Cameron McAdoo</td><td class="mn" style="text-align:right">58.538</td><td class="mn" style="text-align:right">+5.983</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Michael Mosiman</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+7.833</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--husq)"></span>Ryder DiFrancesco</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+15.256</td></tr>
+        <tr><td>6</td><td><span class="bd" style="background:var(--yam)"></span>Maximus Vohland</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+27.035</td></tr>
+        <tr><td>7</td><td><span class="bd" style="background:var(--yam)"></span>Hunter Yoder</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+28.503</td></tr>
+        <tr><td>8</td><td><span class="bd" style="background:var(--yam)"></span>Max Anstie</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+30.052</td></tr>
+        <tr><td>9</td><td><span class="bd" style="background:var(--ktm)"></span>Avery Long</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+43.222</td></tr>
+        <tr><td>10</td><td><span class="bd" style="background:var(--yam)"></span>Parker Ross</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+46.232</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="spanel" id="s2-heat">
+        <div class="card-h"><div class="card-t">Heat 1 — Vohland Win</div><div class="tag tag-y">Kitchen fastest lap 58.024</div></div>
+        <table class="tbl"><thead><tr><th>P</th><th>Rider</th></tr></thead><tbody>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Maximus Vohland</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--kaw)"></span>Levi Kitchen</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--kaw)"></span>Cameron McAdoo</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Michael Mosiman</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--husq)"></span>Ryder DiFrancesco</td></tr>
+        </tbody></table>
+        <div class="card-h" style="margin-top:8px"><div class="card-t">Heat 2 — Deegan Win + Holeshot</div></div>
+        <table class="tbl"><thead><tr><th>P</th><th>Rider</th></tr></thead><tbody>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Haiden Deegan</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--yam)"></span>Max Anstie</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--yam)"></span>Hunter Yoder</td></tr>
+        </tbody></table>
+      </div>
+
+      <div class="spanel" id="s2-qual">
+        <table class="tbl"><thead><tr><th>P</th><th>Rider</th><th style="text-align:right">Time</th></tr></thead><tbody>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Haiden Deegan</td><td class="mn" style="text-align:right;color:var(--yel)">56.638</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--kaw)"></span>Levi Kitchen</td><td class="mn" style="text-align:right">56.793</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--yam)"></span>Michael Mosiman</td><td class="mn" style="text-align:right">57.109</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Maximus Vohland</td><td class="mn" style="text-align:right">57.234</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--husq)"></span>Ryder DiFrancesco</td><td class="mn" style="text-align:right">57.456</td></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ STANDINGS ============ -->
+<div class="panel" id="p-standings">
+  <div class="cls-tog">
+    <button class="cls-b c4 active" onclick="setCls('4')">450SX</button>
+    <button class="cls-b c2" onclick="setCls('2')">250SX</button>
+  </div>
+
+  <div class="show4">
+    <div class="card">
+      <div class="card-h"><div><div class="card-t">450SX Championship</div><div class="card-s">After Round 5 — 5 different podium combos in 5 rounds</div></div><div class="tag tag-g">Updated</div></div>
+      <div class="bar-wrap" id="bars450"></div>
+    </div>
+  </div>
+
+  <div class="show2" style="display:none">
+    <div class="card">
+      <div class="card-h"><div><div class="card-t">250SX West Championship</div><div class="card-s">Deegan +27 pts — dominant</div></div><div class="tag tag-y">Updated</div></div>
+      <div class="bar-wrap" id="bars250"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ARCHIVE ============ -->
+<div class="panel" id="p-archive">
+  <div class="rsel">
+    <button class="rb active" onclick="showRd(this,1)">R1</button>
+    <button class="rb" onclick="showRd(this,2)">R2</button>
+    <button class="rb" onclick="showRd(this,3)">R3</button>
+    <button class="rb" onclick="showRd(this,4)">R4</button>
+    <button class="rb now" onclick="showRd(this,5)">R5 ★</button>
+    <button class="rb fut" onclick="showRd(this,6)">R6 Feb 14</button>
+    <button class="rb fut" onclick="showRd(this,7)">R7 Feb 22</button>
+    <button class="rb fut" onclick="showRd(this,8)">R8 Mar 7</button>
+    <button class="rb fut" onclick="showRd(this,9)">R9 Mar 14</button>
+    <button class="rb fut" onclick="showRd(this,10)">R10 Mar 21</button>
+    <button class="rb fut" onclick="showRd(this,11)">R11 Mar 28</button>
+    <button class="rb fut" onclick="showRd(this,12)">R12 Apr 11</button>
+    <button class="rb fut" onclick="showRd(this,13)">R13 Apr 18</button>
+    <button class="rb fut" onclick="showRd(this,14)">R14 Apr 25</button>
+    <button class="rb fut" onclick="showRd(this,15)">R15 May 2</button>
+    <button class="rb fut" onclick="showRd(this,16)">R16 May 9</button>
+    <button class="rb fut" onclick="showRd(this,17)">R17 May 16</button>
+  </div>
+  <div id="archiveContent"></div>
+</div>
+
+<!-- ============ SCHEDULE ============ -->
+<div class="panel" id="p-schedule">
+  <div class="card" style="margin-top:14px">
+    <div class="card-h"><div class="card-t">2026 Season Schedule</div><div class="card-s">17 rounds &middot; 3 Triple Crowns</div></div>
+    <div class="sched-row done"><div class="sched-rd">1</div><div><div class="sched-city">Anaheim 1</div><div style="font-size:10px;color:var(--t3)">🏆 Tomac / Anstie</div></div><div class="sched-date">Jan 10</div></div>
+    <div class="sched-row done"><div class="sched-rd">2</div><div><div class="sched-city">San Diego</div><div style="font-size:10px;color:var(--t3)">🏆 Tomac / Deegan</div></div><div class="sched-date">Jan 17</div></div>
+    <div class="sched-row done"><div class="sched-rd">3</div><div><div class="sched-city">Anaheim 2</div><div style="font-size:10px;color:var(--t3)">🏆 Sexton / Deegan</div></div><div class="sched-date">Jan 24</div></div>
+    <div class="sched-row done"><div class="sched-rd">4</div><div><div class="sched-city">Houston <span style="color:var(--ora);font-size:9px">TC</span></div><div style="font-size:10px;color:var(--t3)">🏆 Webb / Deegan</div></div><div class="sched-date">Jan 31</div></div>
+    <div class="sched-row now"><div class="sched-rd">5</div><div><div class="sched-city" style="font-weight:700">Glendale ★</div><div style="font-size:10px;color:var(--grn)">🏆 Roczen / Deegan</div></div><div class="sched-date" style="color:var(--grn)">Feb 7</div></div>
+    <div class="sched-row"><div class="sched-rd">6</div><div><div class="sched-city">Seattle</div><div style="font-size:10px;color:var(--t4)">250 West</div></div><div class="sched-date">Feb 14</div></div>
+    <div class="sched-row"><div class="sched-rd">7</div><div><div class="sched-city">Arlington <span style="color:var(--ora);font-size:9px">TC</span></div><div style="font-size:10px;color:var(--cyn)">250 East opener</div></div><div class="sched-date">Feb 22</div></div>
+    <div class="sched-row"><div class="sched-rd">8</div><div><div class="sched-city">Daytona</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 7</div></div>
+    <div class="sched-row"><div class="sched-rd">9</div><div><div class="sched-city">Indianapolis</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 14</div></div>
+    <div class="sched-row"><div class="sched-rd">10</div><div><div class="sched-city">Birmingham</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 21</div></div>
+    <div class="sched-row"><div class="sched-rd">11</div><div><div class="sched-city">Detroit</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 28</div></div>
+    <div class="sched-row"><div class="sched-rd">12</div><div><div class="sched-city">St. Louis</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Apr 11</div></div>
+    <div class="sched-row"><div class="sched-rd">13</div><div><div class="sched-city">Nashville <span style="color:var(--ora);font-size:9px">TC</span></div><div style="font-size:10px;color:var(--t4)">E/W Showdown</div></div><div class="sched-date">Apr 18</div></div>
+    <div class="sched-row"><div class="sched-rd">14</div><div><div class="sched-city">Foxborough</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Apr 25</div></div>
+    <div class="sched-row"><div class="sched-rd">15</div><div><div class="sched-city">Denver</div><div style="font-size:10px;color:var(--t4)">250 West</div></div><div class="sched-date">May 2</div></div>
+    <div class="sched-row"><div class="sched-rd">16</div><div><div class="sched-city">Salt Lake City</div><div style="font-size:10px;color:var(--t4)">E/W Showdown</div></div><div class="sched-date">May 9</div></div>
+    <div class="sched-row"><div class="sched-rd">17</div><div><div class="sched-city">Salt Lake City 2</div><div style="font-size:10px;color:var(--t4)">E/W Showdown</div></div><div class="sched-date">May 16</div></div>
+  </div>
+
+  <!-- Track Maps -->
+  <div class="card" style="margin-top:12px">
+    <div class="card-h"><div class="card-t">Track Maps</div></div>
+    <div class="map-grid" id="mapGrid"></div>
+  </div>
+</div>
+
+<!-- ============ NEWS ============ -->
+<div class="panel" id="p-news">
+  <div class="card" style="margin-top:14px">
+    <div class="card-h"><div class="card-t">Injury Report</div><div class="card-s">R5 Glendale</div></div>
+    <div class="inj"><div><div class="inj-n">Jett Lawrence</div><div class="inj-d">Fractured talus & navicular — season ending</div></div><span class="inj-s inj-out">Season</span></div>
+    <div class="inj"><div><div class="inj-n">Austin Forkner</div><div class="inj-d">Fractured hand — Houston press day</div></div><span class="inj-s inj-out">Out</span></div>
+    <div class="inj"><div><div class="inj-n">RJ Hampshire</div><div class="inj-d">Illness — pulled at qualifying</div></div><span class="inj-s inj-out">DNS</span></div>
+    <div class="inj"><div><div class="inj-n">Malcolm Stewart</div><div class="inj-d">Retired after 10 laps — mechanical?</div></div><span class="inj-s inj-out">DNF</span></div>
+    <div class="inj"><div><div class="inj-n">Joey Savatgy</div><div class="inj-d">Broken toe from Houston — raced P6</div></div><span class="inj-s inj-ok">Raced</span></div>
+  </div>
+
+  <div class="card" style="margin-top:12px">
+    <div class="card-h"><div class="card-t">Headlines</div></div>
+    <div class="news-i"><div class="news-src">Race Recap</div><div class="news-hl">Roczen stuns with wire-to-wire win — Tomac fades to P12</div><div class="news-sub">Ken Roczen led flag-to-flag with the fastest lap of the night (56.700). Eli Tomac, the points leader coming in, had his worst finish of the season.</div></div>
+    <div class="news-i"><div class="news-src">Championship Shakeup</div><div class="news-hl">Hunter Lawrence takes the red plate — new 450 points leader</div><div class="news-sub">Lawrence's consistent P2 finish (4th podium in 5 rounds) vaults him to 106 pts, 5 ahead of Roczen. Tomac drops to 3rd, 8 back.</div></div>
+    <div class="news-i"><div class="news-src">250 Dominance</div><div class="news-hl">Deegan makes it 4 straight — 250 title race is over early</div><div class="news-sub">Haiden Deegan won his 4th consecutive main event, extending his lead to 27 points over Mosiman with 4 West rounds remaining.</div></div>
+    <div class="news-i"><div class="news-src">Stat of the Night</div><div class="news-hl">5 different 450 winners in 5 rounds — most parity since 2009</div><div class="news-sub">Tomac (R1-R2), Sexton (R3), Webb (R4), Roczen (R5). No rider has won twice since Round 2.</div></div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<div class="foot"><a href="https://x.com/hunter_weiss" target="_blank">Built by <strong>@hunter_weiss</strong></a></div>
+
+<script>
+// NAV
+function go(id){
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// CLASS TOGGLE
+function setCls(c){
+  document.querySelectorAll('.cls-b').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.cls-b.c'+c).forEach(b=>b.classList.add('active'));
+  document.querySelectorAll('.show4').forEach(e=>e.style.display=c==='4'?'':'none');
+  document.querySelectorAll('.show2').forEach(e=>e.style.display=c==='2'?'':'none');
+}
+
+// SUB TABS
+function stab(el,id){
+  var parent=el.closest('.card');
+  parent.querySelectorAll('.stab').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  parent.querySelectorAll('.spanel').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// STANDINGS BARS
+var bk={'KTM':'#ff6b00','Honda':'#cc0000','Suzuki':'#ffd200','Kawasaki':'#00a033','Yamaha':'#0055d4','Husqvarna':'#bbbbbb','Ducati':'#cc0000'};
+var s450=[{n:'Hunter Lawrence',b:'Honda',p:106},{n:'Ken Roczen',b:'Suzuki',p:101},{n:'Eli Tomac',b:'KTM',p:98},{n:'Cooper Webb',b:'Yamaha',p:91},{n:'Chase Sexton',b:'Kawasaki',p:89},{n:'Justin Cooper',b:'Yamaha',p:75},{n:'Jorge Prado',b:'KTM',p:73},{n:'Jason Anderson',b:'Suzuki',p:73},{n:'Joey Savatgy',b:'Honda',p:66},{n:'Dylan Ferrandis',b:'Ducati',p:62},{n:'Aaron Plessinger',b:'KTM',p:50},{n:'Christian Craig',b:'Honda',p:45},{n:'Justin Hill',b:'KTM',p:40},{n:'RJ Hampshire',b:'Husqvarna',p:38},{n:'Malcolm Stewart',b:'Husqvarna',p:36},{n:'Colt Nichols',b:'Suzuki',p:34}];
+var s250=[{n:'Haiden Deegan',b:'Yamaha',p:118},{n:'Michael Mosiman',b:'Yamaha',p:91},{n:'Ryder DiFrancesco',b:'Husqvarna',p:89},{n:'Max Anstie',b:'Yamaha',p:88},{n:'Cameron McAdoo',b:'Kawasaki',p:80},{n:'Levi Kitchen',b:'Kawasaki',p:79},{n:'Maximus Vohland',b:'Yamaha',p:77},{n:'Hunter Yoder',b:'Yamaha',p:60},{n:'Parker Ross',b:'Yamaha',p:57},{n:'Avery Long',b:'KTM',p:49}];
+
+function buildBars(id,data){
+  var c=document.getElementById(id);if(!c)return;c.innerHTML='';
+  var ldr=data[0].p;
+  data.forEach(function(r,i){
+    var pct=Math.max(15,(r.p/ldr)*100);
+    var col=bk[r.b]||'#888';
+    var gap=i===0?'<span style="color:#6cff00;font-size:9px;font-family:Oswald;letter-spacing:1px">LEADER</span>':'<span style="color:#5a5c68;font-size:10px">−'+(ldr-r.p)+'</span>';
+    c.innerHTML+='<div class="bar-item"><div class="bar-top"><div class="bar-name"><span style="font-family:Oswald;font-weight:700;color:'+(i<3?'#6cff00':'#5a5c68')+';margin-right:5px;display:inline-block;width:16px">'+(i+1)+'</span><span class="bd" style="background:'+col+'"></span>'+r.n+'</div><div>'+gap+' <span class="bar-pts">'+r.p+'</span></div></div><div class="bar-track"><div class="bar-fill" data-w="'+pct+'" style="background:'+col+'"></div></div></div>';
+  });
+  setTimeout(function(){c.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.w+'%'})},100);
+}
+buildBars('bars450',s450);
+buildBars('bars250',s250);
+
+// ARCHIVE
+var archiveData={
+  1:{city:'Anaheim 1',date:'Jan 10',venue:'Angel Stadium',story:'Tomac dominated wire-to-wire in season opener. Roczen P2 by just 1.4 seconds.',
+    r450:[['Tomac','KTM'],['Roczen','Suzuki'],['Prado','KTM'],['H. Lawrence','Honda'],['Anderson','Suzuki']],
+    r250:[['Anstie','Yamaha'],['Hymas','Honda'],['DiFrancesco','Husqvarna'],['Deegan','Yamaha'],['Mosiman','Yamaha']]},
+  2:{city:'San Diego',date:'Jan 17',venue:'Snapdragon Stadium',story:'Tomac goes back-to-back. Lawrence climbs to P2 in points with 2nd podium.',
+    r450:[['Tomac','KTM'],['H. Lawrence','Honda'],['Roczen','Suzuki'],['Sexton','Kawasaki'],['Savatgy','Honda']],
+    r250:[['Deegan','Yamaha'],['McAdoo','Kawasaki'],['Mosiman','Yamaha'],['Kitchen','Kawasaki'],['Anstie','Yamaha']]},
+  3:{city:'Anaheim 2',date:'Jan 24',venue:'Angel Stadium',story:'Sexton breaks through for 1st win. Lawrence P2 again — Mr. Consistent.',
+    r450:[['Sexton','Kawasaki'],['H. Lawrence','Honda'],['Tomac','KTM'],['Anderson','Suzuki'],['Webb','Yamaha']],
+    r250:[['Deegan','Yamaha'],['Mosiman','Yamaha'],['DiFrancesco','Husqvarna'],['McAdoo','Kawasaki'],['Vohland','Yamaha']]},
+  4:{city:'Houston',date:'Jan 31',venue:'NRG Stadium',story:'Webb wins the Triple Crown. 3 different winners in 4 rounds. Lawrence P2 yet again.',
+    r450:[['Webb','Yamaha'],['H. Lawrence','Honda'],['Roczen','Suzuki'],['Tomac','KTM'],['Sexton','Kawasaki']],
+    r250:[['Deegan','Yamaha'],['Kitchen','Kawasaki'],['McAdoo','Kawasaki'],['Vohland','Yamaha'],['DiFrancesco','Husqvarna']]},
+  5:{city:'Glendale',date:'Feb 7',venue:'State Farm Stadium',story:'Roczen stuns! Tomac collapses to P12. Lawrence inherits red plate. 4 different winners in 5 rounds.',
+    r450:[['Roczen','Suzuki'],['H. Lawrence','Honda'],['Webb','Yamaha'],['J. Cooper','Yamaha'],['Prado','KTM']],
+    r250:[['Deegan','Yamaha'],['Kitchen','Kawasaki'],['McAdoo','Kawasaki'],['Mosiman','Yamaha'],['DiFrancesco','Husqvarna']]}
+};
+var mapBase='https://www.supercrosslive.com/wp-content/uploads/2025/';
+var mapNames={1:'09/Rd01_Anaheim_Overview01-1024x768.jpg',2:'09/Rd02_SanDiego_Overview01-1024x768.jpg',3:'09/Rd03_Anaheim_Overview01-1024x768.jpg',4:'09/Rd04_Houston_Overview01-1024x768.jpg',5:'09/Rd05_Glendale_Overview01-1024x768.jpg',6:'09/Rd06_Seattle_Overview01-1024x768.jpg',7:'09/Rd07_Arlington_Overview01-1024x768.jpg',8:'12/Rd08_Daytona_Overview01.png',9:'09/Rd09_Indianapolis_Overview01-1024x768.jpg',10:'09/Rd10_Birmingham_Overview01-1024x768.jpg',11:'09/Rd11_Detroit_Overview01-1024x768.jpg',12:'09/Rd12_StLouis_Overview01-1024x768.jpg',13:'09/Rd13_Nashville_Overview01-1024x768.jpg',14:'09/Rd14_Foxborough_Overview01-1024x768.jpg',15:'09/Rd15_Denver_Overview01-1024x768.jpg',16:'09/Rd16_SaltLakeCity_Overview01-1024x768.jpg',17:'09/Rd17_SaltLakeCity_Overview01-1024x768.jpg'};
+
+function showRd(el,n){
+  document.querySelectorAll('.rb').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  var c=document.getElementById('archiveContent');
+  var d=archiveData[n];
+  if(d){
+    var podRow=function(arr,cls){
+      var h='';
+      arr.forEach(function(r,i){
+        var col=bk[r[1]]||'#888';
+        var medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
+        h+='<tr'+(i<3?' class="top"':'')+'><td>'+medal+'</td><td><span class="bd" style="background:'+col+'"></span>'+r[0]+'</td></tr>';
+      });
+      return h;
+    };
+    c.innerHTML=
+      '<div class="card" style="margin-top:8px"><div class="card-h"><div><div class="card-t">R'+n+' — '+d.city+'</div><div class="card-s">'+d.date+' &middot; '+d.venue+'</div></div><div class="tag tag-g">Complete</div></div>'+
+      '<div style="padding:12px 14px;font-size:13px;color:var(--t2);border-bottom:1px solid var(--brd)">'+d.story+'</div>'+
+      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0">'+
+        '<div style="border-right:1px solid var(--brd)"><div style="padding:8px 14px;font-family:Oswald;font-size:10px;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase;border-bottom:1px solid var(--brd)">450SX</div><table class="tbl"><tbody>'+podRow(d.r450,'')+'</tbody></table></div>'+
+        '<div><div style="padding:8px 14px;font-family:Oswald;font-size:10px;letter-spacing:1.5px;color:var(--yel);text-transform:uppercase;border-bottom:1px solid var(--brd)">250SX</div><table class="tbl"><tbody>'+podRow(d.r250,'')+'</tbody></table></div>'+
+      '</div>'+
+      '<div style="padding:10px"><img src="'+mapBase+mapNames[n]+'" style="width:100%;border-radius:6px;border:1px solid var(--brd)"></div>'+
+      '</div>';
+  } else {
+    var cities={6:'Seattle',7:'Arlington',8:'Daytona',9:'Indianapolis',10:'Birmingham',11:'Detroit',12:'St. Louis',13:'Nashville',14:'Foxborough',15:'Denver',16:'Salt Lake City',17:'Salt Lake City'};
+    c.innerHTML=
+      '<div class="card" style="margin-top:8px"><div class="card-h"><div class="card-t">R'+n+' — '+(cities[n]||'TBD')+'</div><div class="tag" style="background:rgba(255,255,255,.05);color:var(--t3)">Upcoming</div></div>'+
+      '<div style="padding:14px"><img src="'+mapBase+mapNames[n]+'" style="width:100%;border-radius:6px;border:1px solid var(--brd)"></div>'+
+      '</div>';
+  }
+}
+showRd(document.querySelector('.rb.active'),1);
+
+// TRACK MAP GRID
+var mg=document.getElementById('mapGrid');
+for(var i=1;i<=17;i++){
+  var isCurrent=i===5;
+  mg.innerHTML+='<div style="text-align:center'+(isCurrent?';border:2px solid #6cff00;border-radius:6px;padding:2px':'')+'"><img src="'+mapBase+mapNames[i]+'" alt="R'+i+'"><div style="font-family:Barlow Condensed;font-size:10px;color:'+(isCurrent?'#6cff00':'#5a5c68')+';margin-top:3px">R'+i+'</div></div>';
+}
+</script>
+</body>
+</html>
