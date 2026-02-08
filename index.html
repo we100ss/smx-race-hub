@@ -3,13 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SMX — 2026 Supercross Race Hub</title>
+<title>MOTOCROSS — 2026 Supercross Race Hub</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#07080a;--bg2:#0d0e12;--bg3:#12141a;--bg4:#181a22;--brd:#1a1c24;--brd2:#252830;--t:#ecedf0;--t2:#9395a0;--t3:#5a5c68;--t4:#3a3c44;--grn:#6cff00;--grn2:rgba(108,255,0,.08);--red:#ff2244;--red2:rgba(255,34,68,.08);--yel:#ffd500;--yel2:rgba(255,213,0,.08);--blu:#3388ff;--ora:#ff8800;--cyn:#00ddc6;--ktm:#ff6b00;--hon:#cc0000;--yam:#0055d4;--kaw:#00a033;--suz:#ffd200;--husq:#bbb;--duc:#cc0000}
+:root{--bg:#07080a;--bg2:#0d0e12;--bg3:#12141a;--bg4:#181a22;--brd:#1a1c24;--brd2:#252830;--t:#ecedf0;--t2:#9395a0;--t3:#5a5c68;--t4:#3a3c44;--grn:#6cff00;--grn2:rgba(108,255,0,.08);--red:#ff2244;--red2:rgba(255,34,68,.08);--yel:#ffd500;--yel2:rgba(255,213,0,.08);--blu:#3388ff;--ora:#ff8800;--cyn:#00ddc6;--ktm:#ff6b00;--hon:#cc0000;--yam:#0055d4;--kaw:#00a033;--suz:#ffd200;--husq:#bbb;--duc:#cc0000;--sep:rgba(255,255,255,.03);--sep2:rgba(255,255,255,.04);--overlay:rgba(255,255,255,.04)}
+body.light{--bg:#d8dbe2;--bg2:#e2e5eb;--bg3:#cdd0d8;--bg4:#c2c6cf;--brd:#b0b4be;--brd2:#a0a4ae;--t:#111318;--t2:#3a3e4a;--t3:#5a5e6a;--t4:#7a7e8a;--grn:#0d7a00;--grn2:rgba(13,122,0,.1);--red:#cc1133;--red2:rgba(204,17,51,.1);--yel:#8a7200;--yel2:rgba(138,114,0,.1);--sep:rgba(0,0,0,.06);--sep2:rgba(0,0,0,.08);--overlay:rgba(0,0,0,.04)}
+body.light .logo span{color:var(--grn)}
+body.light .nav-btn.active{color:var(--grn);border-color:var(--grn)}
+body.light .cls-b.active{color:var(--t);background:var(--bg4)}
+body.light .rb.active{background:var(--grn);color:#fff;border-color:var(--grn)}
+body.light .rb.done{color:var(--t)}
+body.light .top td{color:var(--grn)}
+body.light .bar-r.top .bar-fill{opacity:.9}
+body.light .inj-ok{background:rgba(13,122,0,.12);color:var(--grn)}
+body.light .inj-out{background:rgba(204,17,51,.1);color:var(--red)}
+body.light .tag-g{background:rgba(13,122,0,.1);color:var(--grn)}
+body.light .tag-r{background:rgba(204,17,51,.08);color:var(--red)}
+body.light .hs{background:rgba(13,122,0,.1);color:var(--grn)}
+body.light .sched-row.now{background:rgba(13,122,0,.06);border-left-color:var(--grn)}
+body.light .theme-btn{background:var(--bg4);border-color:var(--brd)}
+body.light .rider-links a{background:var(--bg);color:var(--t2)}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit-font-smoothing:antialiased;font-size:14px}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:3px}
+
+.theme-btn{background:var(--bg3);border:1px solid var(--brd);border-radius:6px;padding:4px 8px;cursor:pointer;font-size:14px;line-height:1;transition:all .15s}
+.theme-btn:hover{background:var(--bg4)}
 
 .wrap{max-width:700px;margin:0 auto;padding:0 16px 80px;position:relative;z-index:1}
 
@@ -17,30 +36,30 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
 .hdr{position:sticky;top:0;z-index:100;padding:12px 16px;border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between;background:rgba(7,8,10,.94);backdrop-filter:blur(16px)}
 .hdr::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--grn),var(--yel),var(--red))}
 .logo{font-family:'Oswald';font-weight:700;font-size:18px;letter-spacing:-0.5px}.logo span{color:var(--grn)}
-.hdr-meta{font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;color:var(--t3);text-transform:uppercase}
+.hdr-meta{font-family:'Barlow Condensed';font-size:12px;letter-spacing:1px;color:var(--t3);text-transform:uppercase}
 
 /* NAV — bottom fixed on mobile */
 .nav{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;background:rgba(7,8,10,.96);backdrop-filter:blur(16px);border-top:1px solid var(--brd);padding:6px 0 env(safe-area-inset-bottom,6px)}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;background:none;border:none;cursor:pointer;color:var(--t3);transition:color .15s}
 .nav-btn.active{color:var(--grn)}
 .nav-btn .ico{font-size:18px}
-.nav-btn .lbl{font-family:'Barlow Condensed';font-size:9px;letter-spacing:1px;text-transform:uppercase}
+.nav-btn .lbl{font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase}
 
 /* PANELS */
 .panel{display:none}.panel.active{display:block}
 
 /* CLASS TOGGLE */
 .cls-tog{display:flex;gap:2px;padding:3px;background:var(--bg2);border:1px solid var(--brd);border-radius:6px;width:fit-content;margin:16px 0 12px}
-.cls-b{font-family:'Oswald';font-weight:500;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:4px;cursor:pointer;color:var(--t3);border:none;background:transparent;transition:all .15s}
+.cls-b{font-family:'Oswald';font-weight:500;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;padding:6px 18px;border-radius:4px;cursor:pointer;color:var(--t3);border:none;background:transparent;transition:all .15s}
 .cls-b.active.c4{background:var(--grn);color:#0a0a0c;font-weight:600}
 .cls-b.active.c2{background:var(--yel);color:#0a0a0c;font-weight:600}
 
 /* CARDS */
 .card{background:var(--bg2);border:1px solid var(--brd);border-radius:8px;overflow:hidden;margin-bottom:12px}
 .card-h{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--brd)}
-.card-t{font-family:'Oswald';font-weight:600;font-size:12px;letter-spacing:1.2px;text-transform:uppercase}
-.card-s{font-family:'Barlow';font-size:10px;color:var(--t3)}
-.tag{font-family:'Oswald';font-size:9px;letter-spacing:1.2px;text-transform:uppercase;padding:3px 7px;border-radius:3px;font-weight:500}
+.card-t{font-family:'Oswald';font-weight:600;font-size:14px;letter-spacing:1.2px;text-transform:uppercase}
+.card-s{font-family:'Barlow';font-size:12px;color:var(--t3)}
+.tag{font-family:'Oswald';font-size:10px;letter-spacing:1.2px;text-transform:uppercase;padding:3px 7px;border-radius:3px;font-weight:500}
 .tag-g{background:var(--grn2);color:var(--grn)}.tag-r{background:var(--red2);color:var(--red)}.tag-y{background:var(--yel2);color:var(--yel)}
 
 /* HERO CARD */
@@ -48,27 +67,28 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
 .hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
 .hero.h4::before{background:var(--grn)}.hero.h2::before{background:var(--yel)}
 .hero-inner{padding:20px 16px 16px}
-.hero-label{font-family:'Barlow Condensed';font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.hero-label{font-family:'Barlow Condensed';font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
 .hero-name{font-family:'Oswald';font-weight:700;font-size:32px;line-height:1.1;margin-bottom:2px}
 .hero-sub{font-family:'Barlow';font-size:13px;color:var(--t2);margin-bottom:12px}
 .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .hero-stat{background:var(--bg3);border-radius:6px;padding:10px 8px;text-align:center}
 .hero-stat .val{font-family:'Oswald';font-weight:700;font-size:20px}
-.hero-stat .lbl{font-family:'Barlow Condensed';font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-top:2px}
+.hero-stat .lbl{font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-top:2px}
 
 /* TABLE */
 .tbl{width:100%;border-collapse:collapse}
-.tbl th{font-family:'Barlow Condensed';font-weight:500;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t3);padding:7px 8px;text-align:left;border-bottom:1px solid var(--brd)}
-.tbl td{padding:6px 8px;font-family:'Barlow';font-size:12px;border-bottom:1px solid rgba(255,255,255,.02)}
-.tbl td:first-child{font-family:'Oswald';font-weight:600;font-size:12px;color:var(--t3);width:28px}
+.tbl th{font-family:'Barlow Condensed';font-weight:500;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t3);padding:7px 8px;text-align:left;border-bottom:1px solid var(--brd)}
+.tbl td{padding:7px 8px;font-family:'Barlow';font-size:13px;border-bottom:1px solid var(--sep)}
+.tbl td:first-child{font-family:'Oswald';font-weight:600;font-size:13px;color:var(--t3);width:28px}
 .tbl tr:hover{background:var(--bg3)}
 .tbl .top td:first-child{color:var(--grn)}
-.mn{font-family:'JetBrains Mono';font-size:10px}
+.mn{font-family:'JetBrains Mono';font-size:11px}
+.hs{display:inline-block;font-family:'Oswald';font-size:9px;letter-spacing:.8px;text-transform:uppercase;padding:1px 5px;border-radius:2px;background:rgba(108,255,0,.12);color:var(--grn);margin-left:4px;vertical-align:middle}
 .bd{display:inline-block;width:3px;height:12px;border-radius:2px;margin-right:4px;vertical-align:middle}
 
 /* SUB TABS inside cards */
 .stabs{display:flex;gap:0;border-bottom:1px solid var(--brd)}
-.stab{font-family:'Barlow Condensed';font-size:11px;letter-spacing:.5px;padding:8px 14px;cursor:pointer;color:var(--t3);border:none;background:none;border-bottom:2px solid transparent;transition:all .12s}
+.stab{font-family:'Barlow Condensed';font-size:12px;letter-spacing:.5px;padding:8px 14px;cursor:pointer;color:var(--t3);border:none;background:none;border-bottom:2px solid transparent;transition:all .12s}
 .stab.active{color:var(--grn);border-bottom-color:var(--grn)}
 .stab.y.active{color:var(--yel);border-bottom-color:var(--yel)}
 .spanel{display:none}.spanel.active{display:block}
@@ -76,50 +96,74 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
 /* ROUND SELECTOR */
 .rsel{display:flex;gap:4px;overflow-x:auto;padding:12px 0 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .rsel::-webkit-scrollbar{display:none}
-.rb{font-family:'Oswald';font-size:10px;letter-spacing:.8px;padding:5px 10px;border-radius:4px;border:1px solid var(--brd);background:var(--bg2);color:var(--t3);cursor:pointer;white-space:nowrap;transition:all .12s}
+.rb{font-family:'Oswald';font-size:11px;letter-spacing:.8px;padding:5px 10px;border-radius:4px;border:1px solid var(--brd);background:var(--bg2);color:var(--t3);cursor:pointer;white-space:nowrap;transition:all .12s}
 .rb.active{background:var(--grn);color:#0a0a0c;border-color:var(--grn);font-weight:600}
 .rb.now{border-color:var(--grn);color:var(--grn)}
-.rb.fut{color:var(--t4);border-color:rgba(255,255,255,.04)}
+.rb.fut{color:var(--t4);border-color:var(--sep2)}
 .rd-p{display:none}.rd-p.active{display:block}
 
 /* BARS */
 .bar-wrap{padding:12px 14px}
-.bar-item{margin-bottom:6px}
-.bar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
-.bar-name{font-family:'Barlow';font-weight:500;font-size:11px}
-.bar-pts{font-family:'JetBrains Mono';font-size:10px;font-weight:600}
-.bar-track{height:18px;background:var(--bg3);border-radius:3px;overflow:hidden}
-.bar-fill{height:100%;border-radius:3px;width:0;transition:width 1s cubic-bezier(.22,1,.36,1)}
+.bar-item{padding:8px 14px;border-bottom:1px solid var(--sep);display:grid;grid-template-columns:24px 3px 1fr auto auto;align-items:center;gap:8px}
+.bar-item.top-3{background:var(--grn2)}
+.bar-pos{font-family:'Oswald';font-weight:700;font-size:14px;text-align:center}
+.bar-name{font-family:'Barlow';font-weight:600;font-size:14px}
+.bar-pts{font-family:'JetBrains Mono';font-size:13px;font-weight:700;min-width:32px;text-align:right}
+.bar-gap{font-family:'JetBrains Mono';font-size:11px;color:var(--t3);min-width:36px;text-align:right}
+.bar-meter{height:4px;background:var(--bg3);border-radius:2px;margin-top:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px;width:0;transition:width 1s cubic-bezier(.22,1,.36,1)}
 
 /* SCHEDULE ROW */
-.sched-row{display:grid;grid-template-columns:28px 1fr 80px;align-items:center;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.02);font-size:12px}
+.sched-row{display:grid;grid-template-columns:28px 1fr 80px;align-items:center;padding:8px 14px;border-bottom:1px solid var(--sep);font-size:13px}
 .sched-row:hover{background:var(--bg3)}
-.sched-rd{font-family:'Oswald';font-weight:600;font-size:12px;color:var(--t3)}
+.sched-rd{font-family:'Oswald';font-weight:600;font-size:13px;color:var(--t3)}
 .sched-row.done .sched-rd{color:var(--grn)}
 .sched-row.now{background:var(--grn2);border-left:3px solid var(--grn)}
 .sched-city{font-family:'Barlow';font-weight:500}
-.sched-date{font-family:'JetBrains Mono';font-size:10px;color:var(--t3);text-align:right}
+.sched-date{font-family:'JetBrains Mono';font-size:11px;color:var(--t3);text-align:right}
 
 /* TRACK MAP */
 .map-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:12px 14px}
 .map-grid img{width:100%;border-radius:4px;border:1px solid var(--brd);cursor:pointer}
 
 /* NEWS */
-.news-i{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.02)}
+.news-i{padding:12px 14px;border-bottom:1px solid var(--sep)}
 .news-i:last-child{border-bottom:none}
-.news-src{font-family:'Barlow Condensed';font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:2px}
+.news-src{font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:2px}
 .news-hl{font-family:'Barlow';font-weight:600;font-size:13px;margin-bottom:3px}
-.news-sub{font-family:'Barlow';font-size:11px;color:var(--t2);line-height:1.5}
+.news-sub{font-family:'Barlow';font-size:13px;color:var(--t2);line-height:1.5}
 
 /* INJURY */
-.inj{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid rgba(255,255,255,.02);font-size:12px}
-.inj-n{font-weight:600}.inj-d{font-size:10px;color:var(--t3)}
-.inj-s{font-family:'Oswald';font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px}
+.inj{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid var(--sep);font-size:13px}
+.inj-n{font-weight:600}.inj-d{font-size:11px;color:var(--t3)}
+.inj-s{font-family:'Oswald';font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:2px 6px;border-radius:3px}
 .inj-out{background:var(--red2);color:var(--red)}.inj-ok{background:var(--grn2);color:var(--grn)}
 
+/* INJURY FULL */
+.inj-full{padding:12px 14px;border-bottom:1px solid var(--sep)}
+.inj-full:last-child{border-bottom:none}
+.inj-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.inj-full .inj-n{font-family:'Barlow';font-weight:600;font-size:14px}
+.inj-num{font-family:'JetBrains Mono';font-size:11px;color:var(--t3);font-weight:400}
+.inj-detail{font-family:'Barlow';font-size:12px;color:var(--t2);margin-bottom:4px}
+.inj-recov{font-family:'Barlow';font-size:12px;color:var(--t2);background:var(--bg3);border-radius:4px;padding:6px 8px;line-height:1.5}
+.inj-recov strong{color:var(--t)}
+.inj-icon{font-size:12px}
+
 /* FOOTER */
+.rider-card{padding:12px 14px;border-bottom:1px solid var(--brd)}
+.rider-card:last-child{border-bottom:none}
+.rider-top{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.rider-pos{font-family:'Oswald';font-weight:700;font-size:18px;color:var(--t3);min-width:24px;text-align:center}
+.rider-name{font-family:'Barlow';font-weight:600;font-size:14px}
+.rider-team{font-family:'Barlow Condensed';font-size:11px;letter-spacing:.5px;color:var(--t3)}
+.rider-bio{font-family:'Barlow';font-size:13px;color:var(--t2);line-height:1.5;margin-bottom:6px}
+.rider-links{display:flex;gap:6px}
+.rider-links a{font-family:'Oswald';font-size:11px;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:3px;text-decoration:none;background:var(--overlay);color:var(--t2);border:1px solid var(--brd);transition:all .15s}
+.rider-links a:hover{background:var(--grn2);color:var(--grn);border-color:rgba(108,255,0,.3)}
+
 .foot{text-align:center;padding:20px 0 40px}
-.foot a{font-family:'Barlow Condensed';font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);text-decoration:none;transition:color .2s}
+.foot a{font-family:'Barlow Condensed';font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);text-decoration:none;transition:color .2s}
 .foot a:hover{color:var(--grn)}
 
 @media(min-width:768px){
@@ -140,8 +184,11 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
 <body>
 
 <div class="hdr">
-  <div class="logo">SMX<span>HUB</span></div>
+  <div class="logo">MOTO<span>CROSS</span></div>
+  <div style="display:flex;align-items:center;gap:12px">
   <div class="hdr-meta">Round 5 &middot; Glendale &middot; Feb 7</div>
+  <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">🌙</button>
+</div>
 </div>
 
 <div class="wrap">
@@ -150,9 +197,11 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
 <nav class="nav">
   <button class="nav-btn active" onclick="go('results')"><span class="ico">🏁</span><span class="lbl">Results</span></button>
   <button class="nav-btn" onclick="go('standings')"><span class="ico">📊</span><span class="lbl">Standings</span></button>
-  <button class="nav-btn" onclick="go('archive')"><span class="ico">📁</span><span class="lbl">Archive</span></button>
+  <button class="nav-btn" onclick="go('archive')"><span class="ico">📁</span><span class="lbl">Past Races</span></button>
   <button class="nav-btn" onclick="go('schedule')"><span class="ico">📅</span><span class="lbl">Schedule</span></button>
   <button class="nav-btn" onclick="go('news')"><span class="ico">📰</span><span class="lbl">News</span></button>
+  <button class="nav-btn" onclick="go('injuries')"><span class="ico">🏥</span><span class="lbl">Injuries</span></button>
+  <button class="nav-btn" onclick="go('riders')"><span class="ico">🏍️</span><span class="lbl">Riders</span></button>
 </nav>
 
 <!-- ============ RESULTS ============ -->
@@ -169,7 +218,7 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
       <div class="hero-inner">
         <div class="hero-label">450SX Main Event Winner — Round 5 Glendale</div>
         <div class="hero-name"><span class="bd" style="background:var(--suz)"></span>Ken Roczen</div>
-        <div class="hero-sub">Progressive Insurance Suzuki &middot; Friese holeshot &middot; 23 laps</div>
+        <div class="hero-sub">Progressive Insurance Suzuki &middot; 23 laps &middot; Led every lap after passing Lawrence</div>
         <div class="hero-stats">
           <div class="hero-stat"><div class="val" style="color:var(--grn)">56.700</div><div class="lbl">Best Lap</div></div>
           <div class="hero-stat"><div class="val">21:48</div><div class="lbl">Race Time</div></div>
@@ -205,7 +254,7 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
         <tr><td>14</td><td><span class="bd" style="background:var(--hon)"></span>Christian Craig</td><td class="mn" style="text-align:right">59.402</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
         <tr><td>15</td><td><span class="bd" style="background:var(--hon)"></span>Shane McElrath</td><td class="mn" style="text-align:right">59.326</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
         <tr><td>16</td><td><span class="bd" style="background:var(--suz)"></span>Colt Nichols</td><td class="mn" style="text-align:right">59.312</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
-        <tr><td>17</td><td><span class="bd" style="background:var(--kaw)"></span>Vince Friese</td><td class="mn" style="text-align:right">1:00.002</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
+        <tr><td>17</td><td><span class="bd" style="background:var(--kaw)"></span>Vince Friese<span class="hs">Holeshot</span></td><td class="mn" style="text-align:right">1:00.002</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
         <tr><td>18</td><td><span class="bd" style="background:var(--yam)"></span>Freddie Noren</td><td class="mn" style="text-align:right">1:00.365</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
         <tr><td>19</td><td><span class="bd" style="background:var(--kaw)"></span>Mitchell Harrison</td><td class="mn" style="text-align:right">1:00.578</td><td class="mn" style="text-align:right;color:var(--ora)">1 Lap</td></tr>
         <tr><td>20</td><td><span class="bd" style="background:var(--ktm)"></span>Grant Harlan</td><td class="mn" style="text-align:right">1:00.789</td><td class="mn" style="text-align:right;color:var(--red)">2 Laps</td></tr>
@@ -216,21 +265,30 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
 
       <!-- 450 HEATS -->
       <div class="spanel" id="s4-heat">
-        <div class="card-h"><div class="card-t">Heat 1 — Tomac Win</div></div>
+        <div class="card-h"><div class="card-t">Heat 1 — Tomac Win</div><div class="tag tag-g">9 transfer</div></div>
         <table class="tbl"><thead><tr><th>P</th><th>Rider</th><th style="text-align:right">Gap</th></tr></thead><tbody>
-        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--ktm)"></span>Eli Tomac</td><td style="text-align:right">—</td></tr>
-        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--suz)"></span>Ken Roczen</td><td class="mn" style="text-align:right">+3.142</td></tr>
-        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--kaw)"></span>Chase Sexton</td><td class="mn" style="text-align:right">+4.571</td></tr>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--ktm)"></span>Eli Tomac<span class="hs">Holeshot</span></td><td style="text-align:right">—</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--hon)"></span>Hunter Lawrence</td><td class="mn" style="text-align:right">+2.108</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--yam)"></span>Justin Cooper</td><td class="mn" style="text-align:right">+3.845</td></tr>
         <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Cooper Webb</td><td class="mn" style="text-align:right">+5.893</td></tr>
-        <tr><td>5</td><td><span class="bd" style="background:var(--hon)"></span>Joey Savatgy</td><td class="mn" style="text-align:right">+8.212</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--hon)"></span>Christian Craig</td><td class="mn" style="text-align:right">+7.412</td></tr>
+        <tr><td>6</td><td><span class="bd" style="background:var(--kaw)"></span>Garrett Marchbanks</td><td class="mn" style="text-align:right">+9.234</td></tr>
+        <tr><td>7</td><td><span class="bd" style="background:var(--suz)"></span>Colt Nichols</td><td class="mn" style="text-align:right">+11.567</td></tr>
+        <tr><td>8</td><td><span class="bd" style="background:var(--ktm)"></span>Justin Hill</td><td class="mn" style="text-align:right">+14.023</td></tr>
+        <tr><td>9</td><td><span class="bd" style="background:var(--ktm)"></span>Grant Harlan</td><td class="mn" style="text-align:right">+16.891</td></tr>
         </tbody></table>
-        <div class="card-h" style="margin-top:8px"><div class="card-t">Heat 2 — Prado Win</div></div>
+
+        <div class="card-h" style="margin-top:8px"><div class="card-t">Heat 2 — Prado Win</div><div class="tag tag-g">9 transfer</div></div>
         <table class="tbl"><thead><tr><th>P</th><th>Rider</th><th style="text-align:right">Gap</th></tr></thead><tbody>
-        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--ktm)"></span>Jorge Prado</td><td style="text-align:right">—</td></tr>
-        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--hon)"></span>Hunter Lawrence</td><td class="mn" style="text-align:right">+2.891</td></tr>
-        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--suz)"></span>Jason Anderson</td><td class="mn" style="text-align:right">+6.344</td></tr>
-        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Justin Cooper</td><td class="mn" style="text-align:right">+8.102</td></tr>
-        <tr><td>5</td><td><span class="bd" style="background:var(--ktm)"></span>Aaron Plessinger</td><td class="mn" style="text-align:right">+10.567</td></tr>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--ktm)"></span>Jorge Prado<span class="hs">Holeshot</span></td><td style="text-align:right">—</td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--hon)"></span>Joey Savatgy</td><td class="mn" style="text-align:right">+3.456</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--suz)"></span>Jason Anderson</td><td class="mn" style="text-align:right">+5.102</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--suz)"></span>Ken Roczen</td><td class="mn" style="text-align:right">+5.344</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--kaw)"></span>Chase Sexton</td><td class="mn" style="text-align:right">+7.891</td></tr>
+        <tr><td>6</td><td><span class="bd" style="background:var(--ktm)"></span>Aaron Plessinger</td><td class="mn" style="text-align:right">+10.567</td></tr>
+        <tr><td>7</td><td><span class="bd" style="background:var(--husq)"></span>Malcolm Stewart</td><td class="mn" style="text-align:right">+12.334</td></tr>
+        <tr><td>8</td><td><span class="bd" style="background:var(--duc)"></span>Dylan Ferrandis</td><td class="mn" style="text-align:right">+14.778</td></tr>
+        <tr><td>9</td><td><span class="bd" style="background:var(--kaw)"></span>Vince Friese</td><td class="mn" style="text-align:right">+18.102</td></tr>
         </tbody></table>
       </div>
 
@@ -258,7 +316,7 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
       <div class="hero-inner">
         <div class="hero-label">250SX West Main Event Winner — Round 5 Glendale</div>
         <div class="hero-name" style="color:var(--yel)"><span class="bd" style="background:var(--yam)"></span>Haiden Deegan</div>
-        <div class="hero-sub">Monster Energy Yamaha &middot; Holeshot &middot; 4th consecutive win &middot; 17 laps</div>
+        <div class="hero-sub">Monster Energy Yamaha &middot; 4th consecutive win &middot; Led every lap &middot; 17 laps</div>
         <div class="hero-stats">
           <div class="hero-stat"><div class="val" style="color:var(--yel)">58.111</div><div class="lbl">Best Lap</div></div>
           <div class="hero-stat"><div class="val">16:23</div><div class="lbl">Race Time</div></div>
@@ -276,33 +334,55 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
 
       <div class="spanel active" id="s2-main">
         <table class="tbl"><thead><tr><th>P</th><th>Rider</th><th style="text-align:right">Best Lap</th><th style="text-align:right">Gap</th></tr></thead><tbody>
-        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Haiden Deegan</td><td class="mn" style="text-align:right;color:var(--yel)">58.111</td><td style="text-align:right">—</td></tr>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Haiden Deegan<span class="hs">Holeshot</span></td><td class="mn" style="text-align:right;color:var(--yel)">58.111</td><td style="text-align:right">—</td></tr>
         <tr class="top"><td>2</td><td><span class="bd" style="background:var(--kaw)"></span>Levi Kitchen</td><td class="mn" style="text-align:right">58.255</td><td class="mn" style="text-align:right">+4.156</td></tr>
         <tr class="top"><td>3</td><td><span class="bd" style="background:var(--kaw)"></span>Cameron McAdoo</td><td class="mn" style="text-align:right">58.538</td><td class="mn" style="text-align:right">+5.983</td></tr>
-        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Michael Mosiman</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+7.833</td></tr>
-        <tr><td>5</td><td><span class="bd" style="background:var(--husq)"></span>Ryder DiFrancesco</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+15.256</td></tr>
-        <tr><td>6</td><td><span class="bd" style="background:var(--yam)"></span>Maximus Vohland</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+27.035</td></tr>
-        <tr><td>7</td><td><span class="bd" style="background:var(--yam)"></span>Hunter Yoder</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+28.503</td></tr>
-        <tr><td>8</td><td><span class="bd" style="background:var(--yam)"></span>Max Anstie</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+30.052</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Michael Mosiman</td><td class="mn" style="text-align:right">58.620</td><td class="mn" style="text-align:right">+7.833</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--husq)"></span>Ryder DiFrancesco</td><td class="mn" style="text-align:right">58.891</td><td class="mn" style="text-align:right">+15.256</td></tr>
+        <tr><td>6</td><td><span class="bd" style="background:var(--yam)"></span>Maximus Vohland</td><td class="mn" style="text-align:right">59.103</td><td class="mn" style="text-align:right">+27.035</td></tr>
+        <tr><td>7</td><td><span class="bd" style="background:var(--yam)"></span>Hunter Yoder</td><td class="mn" style="text-align:right">59.244</td><td class="mn" style="text-align:right">+28.503</td></tr>
+        <tr><td>8</td><td><span class="bd" style="background:var(--yam)"></span>Max Anstie</td><td class="mn" style="text-align:right">59.012</td><td class="mn" style="text-align:right">+30.052</td></tr>
         <tr><td>9</td><td><span class="bd" style="background:var(--ktm)"></span>Avery Long</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+43.222</td></tr>
         <tr><td>10</td><td><span class="bd" style="background:var(--yam)"></span>Parker Ross</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+46.232</td></tr>
+        <tr><td>11</td><td><span class="bd" style="background:var(--yam)"></span>Carson Mumford</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+48.1</td></tr>
+        <tr><td>12</td><td><span class="bd" style="background:var(--husq)"></span>Cole Thompson</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+50.3</td></tr>
+        <tr><td>13</td><td><span class="bd" style="background:var(--ktm)"></span>Jordon Turner</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+52.8</td></tr>
+        <tr><td>14</td><td><span class="bd" style="background:var(--yam)"></span>Josh Varize</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+55.0</td></tr>
+        <tr><td>15</td><td><span class="bd" style="background:var(--husq)"></span>Robbie Wageman</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+57.4</td></tr>
+        <tr><td>16</td><td><span class="bd" style="background:var(--ktm)"></span>Justin Rodebell</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+1:02</td></tr>
+        <tr><td>17</td><td><span class="bd" style="background:var(--ktm)"></span>Preston Masciangelo</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+1:05</td></tr>
+        <tr><td>18</td><td><span class="bd" style="background:var(--husq)"></span>Crockett Myers</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+1:08</td></tr>
+        <tr><td>19</td><td><span class="bd" style="background:var(--ktm)"></span>Kyle Wise</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+1 Lap</td></tr>
+        <tr><td>20</td><td><span class="bd" style="background:var(--hon)"></span>Garrett Marchbanks</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">+1 Lap</td></tr>
+        <tr><td>21</td><td><span class="bd" style="background:var(--ktm)"></span>Derek Kelley</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">DNF</td></tr>
+        <tr><td>22</td><td><span class="bd" style="background:var(--suz)"></span>Dilan Schwartz</td><td class="mn" style="text-align:right">—</td><td class="mn" style="text-align:right">DNF</td></tr>
         </tbody></table>
       </div>
 
       <div class="spanel" id="s2-heat">
-        <div class="card-h"><div class="card-t">Heat 1 — Vohland Win</div><div class="tag tag-y">Kitchen fastest lap 58.024</div></div>
+        <div class="card-h"><div class="card-t">Heat 1 — Vohland Win</div><div class="tag tag-y">9 transfer to Main</div></div>
         <table class="tbl"><thead><tr><th>P</th><th>Rider</th></tr></thead><tbody>
-        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Maximus Vohland</td></tr>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Maximus Vohland<span class="hs">Holeshot</span></td></tr>
         <tr class="top"><td>2</td><td><span class="bd" style="background:var(--kaw)"></span>Levi Kitchen</td></tr>
-        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--kaw)"></span>Cameron McAdoo</td></tr>
-        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Michael Mosiman</td></tr>
-        <tr><td>5</td><td><span class="bd" style="background:var(--husq)"></span>Ryder DiFrancesco</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--ktm)"></span>Jordon Turner</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--ktm)"></span>Avery Long</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--yam)"></span>Max Anstie</td></tr>
+        <tr><td>6</td><td><span class="bd" style="background:var(--husq)"></span>Cole Thompson</td></tr>
+        <tr><td>7</td><td><span class="bd" style="background:var(--husq)"></span>Robbie Wageman</td></tr>
+        <tr><td>8</td><td><span class="bd" style="background:var(--yam)"></span>Parker Ross</td></tr>
+        <tr><td>9</td><td><span class="bd" style="background:var(--ktm)"></span>Preston Masciangelo</td></tr>
         </tbody></table>
-        <div class="card-h" style="margin-top:8px"><div class="card-t">Heat 2 — Deegan Win + Holeshot</div></div>
+        <div class="card-h" style="margin-top:8px"><div class="card-t">Heat 2 — Deegan Win</div><div class="tag tag-y">9 transfer to Main</div></div>
         <table class="tbl"><thead><tr><th>P</th><th>Rider</th></tr></thead><tbody>
-        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Haiden Deegan</td></tr>
-        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--yam)"></span>Max Anstie</td></tr>
-        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--yam)"></span>Hunter Yoder</td></tr>
+        <tr class="top"><td>1</td><td><span class="bd" style="background:var(--yam)"></span>Haiden Deegan<span class="hs">Holeshot</span></td></tr>
+        <tr class="top"><td>2</td><td><span class="bd" style="background:var(--yam)"></span>Michael Mosiman</td></tr>
+        <tr class="top"><td>3</td><td><span class="bd" style="background:var(--kaw)"></span>Cameron McAdoo</td></tr>
+        <tr><td>4</td><td><span class="bd" style="background:var(--yam)"></span>Hunter Yoder</td></tr>
+        <tr><td>5</td><td><span class="bd" style="background:var(--yam)"></span>Carson Mumford</td></tr>
+        <tr><td>6</td><td><span class="bd" style="background:var(--yam)"></span>Josh Varize</td></tr>
+        <tr><td>7</td><td><span class="bd" style="background:var(--ktm)"></span>Justin Rodebell</td></tr>
+        <tr><td>8</td><td><span class="bd" style="background:var(--husq)"></span>Ryder DiFrancesco</td></tr>
+        <tr><td>9</td><td><span class="bd" style="background:var(--husq)"></span>Crockett Myers</td></tr>
         </tbody></table>
       </div>
 
@@ -329,14 +409,14 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
   <div class="show4">
     <div class="card">
       <div class="card-h"><div><div class="card-t">450SX Championship</div><div class="card-s">After Round 5 — 5 different podium combos in 5 rounds</div></div><div class="tag tag-g">Updated</div></div>
-      <div class="bar-wrap" id="bars450"></div>
+      <div class="bar-wrap" id="bars450"><div class="bar-item" style="padding:6px 14px;border-bottom:1px solid var(--brd)"><div style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3)">Pos</div><div></div><div style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3)">Rider</div><div style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);text-align:right">Gap</div><div style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);text-align:right">Pts</div></div></div>
     </div>
   </div>
 
   <div class="show2" style="display:none">
     <div class="card">
       <div class="card-h"><div><div class="card-t">250SX West Championship</div><div class="card-s">Deegan +27 pts — dominant</div></div><div class="tag tag-y">Updated</div></div>
-      <div class="bar-wrap" id="bars250"></div>
+      <div class="bar-wrap" id="bars250"><div class="bar-item" style="padding:6px 14px;border-bottom:1px solid var(--brd)"><div style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3)">Pos</div><div></div><div style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3)">Rider</div><div style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);text-align:right">Gap</div><div style="font-family:'Barlow Condensed';font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--t3);text-align:right">Pts</div></div></div>
     </div>
   </div>
 </div>
@@ -344,11 +424,11 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
 <!-- ============ ARCHIVE ============ -->
 <div class="panel" id="p-archive">
   <div class="rsel">
-    <button class="rb active" onclick="showRd(this,1)">R1</button>
+    <button class="rb" onclick="showRd(this,1)">R1</button>
     <button class="rb" onclick="showRd(this,2)">R2</button>
     <button class="rb" onclick="showRd(this,3)">R3</button>
     <button class="rb" onclick="showRd(this,4)">R4</button>
-    <button class="rb now" onclick="showRd(this,5)">R5 ★</button>
+    <button class="rb now active" onclick="showRd(this,5)">R5 ★</button>
     <button class="rb fut" onclick="showRd(this,6)">R6 Feb 14</button>
     <button class="rb fut" onclick="showRd(this,7)">R7 Feb 22</button>
     <button class="rb fut" onclick="showRd(this,8)">R8 Mar 7</button>
@@ -369,49 +449,352 @@ body{background:var(--bg);color:var(--t);font-family:'Barlow',sans-serif;-webkit
 <div class="panel" id="p-schedule">
   <div class="card" style="margin-top:14px">
     <div class="card-h"><div class="card-t">2026 Season Schedule</div><div class="card-s">17 rounds &middot; 3 Triple Crowns</div></div>
-    <div class="sched-row done"><div class="sched-rd">1</div><div><div class="sched-city">Anaheim 1</div><div style="font-size:10px;color:var(--t3)">🏆 Tomac / Anstie</div></div><div class="sched-date">Jan 10</div></div>
-    <div class="sched-row done"><div class="sched-rd">2</div><div><div class="sched-city">San Diego</div><div style="font-size:10px;color:var(--t3)">🏆 Tomac / Deegan</div></div><div class="sched-date">Jan 17</div></div>
-    <div class="sched-row done"><div class="sched-rd">3</div><div><div class="sched-city">Anaheim 2</div><div style="font-size:10px;color:var(--t3)">🏆 Sexton / Deegan</div></div><div class="sched-date">Jan 24</div></div>
-    <div class="sched-row done"><div class="sched-rd">4</div><div><div class="sched-city">Houston <span style="color:var(--ora);font-size:9px">TC</span></div><div style="font-size:10px;color:var(--t3)">🏆 Webb / Deegan</div></div><div class="sched-date">Jan 31</div></div>
-    <div class="sched-row now"><div class="sched-rd">5</div><div><div class="sched-city" style="font-weight:700">Glendale ★</div><div style="font-size:10px;color:var(--grn)">🏆 Roczen / Deegan</div></div><div class="sched-date" style="color:var(--grn)">Feb 7</div></div>
-    <div class="sched-row"><div class="sched-rd">6</div><div><div class="sched-city">Seattle</div><div style="font-size:10px;color:var(--t4)">250 West</div></div><div class="sched-date">Feb 14</div></div>
+    <div class="sched-row done"><div class="sched-rd">1</div><div><div class="sched-city">Anaheim 1</div><div style="font-size:11px;color:var(--t3)">🏆 Tomac / Anstie</div></div><div class="sched-date">Jan 10</div></div>
+    <div class="sched-row done"><div class="sched-rd">2</div><div><div class="sched-city">San Diego</div><div style="font-size:11px;color:var(--t3)">🏆 Tomac / Deegan</div></div><div class="sched-date">Jan 17</div></div>
+    <div class="sched-row done"><div class="sched-rd">3</div><div><div class="sched-city">Anaheim 2</div><div style="font-size:11px;color:var(--t3)">🏆 Sexton / Deegan</div></div><div class="sched-date">Jan 24</div></div>
+    <div class="sched-row done"><div class="sched-rd">4</div><div><div class="sched-city">Houston <span style="color:var(--ora);font-size:9px">TC</span></div><div style="font-size:11px;color:var(--t3)">🏆 Webb / Deegan</div></div><div class="sched-date">Jan 31</div></div>
+    <div class="sched-row now"><div class="sched-rd">5</div><div><div class="sched-city" style="font-weight:700">Glendale ★</div><div style="font-size:11px;color:var(--grn)">🏆 Roczen / Deegan</div></div><div class="sched-date" style="color:var(--grn)">Feb 7</div></div>
+    <div class="sched-row"><div class="sched-rd">6</div><div><div class="sched-city">Seattle</div><div style="font-size:11px;color:var(--t4)">250 West</div></div><div class="sched-date">Feb 14</div></div>
     <div class="sched-row"><div class="sched-rd">7</div><div><div class="sched-city">Arlington <span style="color:var(--ora);font-size:9px">TC</span></div><div style="font-size:10px;color:var(--cyn)">250 East opener</div></div><div class="sched-date">Feb 22</div></div>
-    <div class="sched-row"><div class="sched-rd">8</div><div><div class="sched-city">Daytona</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 7</div></div>
-    <div class="sched-row"><div class="sched-rd">9</div><div><div class="sched-city">Indianapolis</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 14</div></div>
-    <div class="sched-row"><div class="sched-rd">10</div><div><div class="sched-city">Birmingham</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 21</div></div>
-    <div class="sched-row"><div class="sched-rd">11</div><div><div class="sched-city">Detroit</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 28</div></div>
-    <div class="sched-row"><div class="sched-rd">12</div><div><div class="sched-city">St. Louis</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Apr 11</div></div>
-    <div class="sched-row"><div class="sched-rd">13</div><div><div class="sched-city">Nashville <span style="color:var(--ora);font-size:9px">TC</span></div><div style="font-size:10px;color:var(--t4)">E/W Showdown</div></div><div class="sched-date">Apr 18</div></div>
-    <div class="sched-row"><div class="sched-rd">14</div><div><div class="sched-city">Foxborough</div><div style="font-size:10px;color:var(--t4)">250 East</div></div><div class="sched-date">Apr 25</div></div>
-    <div class="sched-row"><div class="sched-rd">15</div><div><div class="sched-city">Denver</div><div style="font-size:10px;color:var(--t4)">250 West</div></div><div class="sched-date">May 2</div></div>
-    <div class="sched-row"><div class="sched-rd">16</div><div><div class="sched-city">Salt Lake City</div><div style="font-size:10px;color:var(--t4)">E/W Showdown</div></div><div class="sched-date">May 9</div></div>
-    <div class="sched-row"><div class="sched-rd">17</div><div><div class="sched-city">Salt Lake City 2</div><div style="font-size:10px;color:var(--t4)">E/W Showdown</div></div><div class="sched-date">May 16</div></div>
+    <div class="sched-row"><div class="sched-rd">8</div><div><div class="sched-city">Daytona</div><div style="font-size:11px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 7</div></div>
+    <div class="sched-row"><div class="sched-rd">9</div><div><div class="sched-city">Indianapolis</div><div style="font-size:11px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 14</div></div>
+    <div class="sched-row"><div class="sched-rd">10</div><div><div class="sched-city">Birmingham</div><div style="font-size:11px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 21</div></div>
+    <div class="sched-row"><div class="sched-rd">11</div><div><div class="sched-city">Detroit</div><div style="font-size:11px;color:var(--t4)">250 East</div></div><div class="sched-date">Mar 28</div></div>
+    <div class="sched-row"><div class="sched-rd">12</div><div><div class="sched-city">St. Louis</div><div style="font-size:11px;color:var(--t4)">250 East</div></div><div class="sched-date">Apr 11</div></div>
+    <div class="sched-row"><div class="sched-rd">13</div><div><div class="sched-city">Nashville <span style="color:var(--ora);font-size:9px">TC</span></div><div style="font-size:11px;color:var(--t4)">E/W Showdown</div></div><div class="sched-date">Apr 18</div></div>
+    <div class="sched-row"><div class="sched-rd">14</div><div><div class="sched-city">Foxborough</div><div style="font-size:11px;color:var(--t4)">250 East</div></div><div class="sched-date">Apr 25</div></div>
+    <div class="sched-row"><div class="sched-rd">15</div><div><div class="sched-city">Denver</div><div style="font-size:11px;color:var(--t4)">250 West</div></div><div class="sched-date">May 2</div></div>
+    <div class="sched-row"><div class="sched-rd">16</div><div><div class="sched-city">Salt Lake City</div><div style="font-size:11px;color:var(--t4)">E/W Showdown</div></div><div class="sched-date">May 9</div></div>
+    <div class="sched-row"><div class="sched-rd">17</div><div><div class="sched-city">Salt Lake City 2</div><div style="font-size:11px;color:var(--t4)">E/W Showdown</div></div><div class="sched-date">May 16</div></div>
   </div>
 
   <!-- Track Maps -->
   <div class="card" style="margin-top:12px">
     <div class="card-h"><div class="card-t">Track Maps</div></div>
-    <div class="map-grid" id="mapGrid"></div>
   </div>
 </div>
 
 <!-- ============ NEWS ============ -->
 <div class="panel" id="p-news">
   <div class="card" style="margin-top:14px">
-    <div class="card-h"><div class="card-t">Injury Report</div><div class="card-s">R5 Glendale</div></div>
-    <div class="inj"><div><div class="inj-n">Jett Lawrence</div><div class="inj-d">Fractured talus & navicular — season ending</div></div><span class="inj-s inj-out">Season</span></div>
-    <div class="inj"><div><div class="inj-n">Austin Forkner</div><div class="inj-d">Fractured hand — Houston press day</div></div><span class="inj-s inj-out">Out</span></div>
-    <div class="inj"><div><div class="inj-n">RJ Hampshire</div><div class="inj-d">Illness — pulled at qualifying</div></div><span class="inj-s inj-out">DNS</span></div>
-    <div class="inj"><div><div class="inj-n">Malcolm Stewart</div><div class="inj-d">Retired after 10 laps — mechanical?</div></div><span class="inj-s inj-out">DNF</span></div>
-    <div class="inj"><div><div class="inj-n">Joey Savatgy</div><div class="inj-d">Broken toe from Houston — raced P6</div></div><span class="inj-s inj-ok">Raced</span></div>
+    <div class="card-h"><div class="card-t">Latest Headlines</div><div class="card-s">Sources: Racer X, Crash.net, NBC Sports, Cycle News</div></div>
+
+    <div class="news-i">
+      <div class="news-src">Crash.net &middot; Race Recap</div>
+      <div class="news-hl">Roczen takes commanding wire-to-wire win after Tomac first-turn crash</div>
+      <div class="news-sub">Roczen started second behind Lawrence, found a way past within five minutes, and stretched a 5+ second lead. Tomac was caught in a T1 pileup with Craig and Nichols, dropping to dead last and recovering to only P12.</div>
+      <a href="https://www.crash.net/moto-x/news/1089080/1/ken-roczen-takes-glendale-ama-supercross-win-after-points-leader-hits-trouble" target="_blank" style="font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--grn);text-decoration:none;margin-top:4px;display:inline-block">Read on Crash.net →</a>
+    </div>
+
+    <div class="news-i">
+      <div class="news-src">NBC Sports &middot; Post-Race</div>
+      <div class="news-hl">Lawrence takes red plate without winning a race — ties all-time record for P2 finishes</div>
+      <div class="news-sub">Lawrence now has five runner-up SX finishes without a win, tying Guy Cooper for second all-time. Five points clear of Roczen, eight ahead of Tomac entering Seattle.</div>
+      <a href="https://www.nbcsports.com/motor-sports/news/2026-supermotocross-round-5-glendale-450-updates" target="_blank" style="font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--grn);text-decoration:none;margin-top:4px;display:inline-block">Read on NBC Sports →</a>
+    </div>
+
+    <div class="news-i">
+      <div class="news-src">Racer X &middot; Race Day Feed</div>
+      <div class="news-hl">Deegan fires imaginary bow and arrow after 4th consecutive win</div>
+      <div class="news-sub">Holeshot, led every lap, 27-point lead. After crossing the finish, Deegan stopped and pretended to draw a bow — when Kitchen crossed the line, he let the arrow fly. 10th career 250SX win ties Ryan Dungey for 19th all-time.</div>
+      <a href="https://racerxonline.com/2026/02/07/live-written-updates-and-results-from-glendale-supercross" target="_blank" style="font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--grn);text-decoration:none;margin-top:4px;display:inline-block">Read on Racer X →</a>
+    </div>
+
+    <div class="news-i">
+      <div class="news-src">Racer X &middot; Racerhead #6</div>
+      <div class="news-hl">5 riders can win this title — 450 class is wide open heading east</div>
+      <div class="news-sub">Tomac, Roczen, Webb, Sexton, and Lawrence have all proven they can win. Four different winners in five rounds. Webb's Triple Crown mastery, Roczen's wire-to-wire speed, and Lawrence's consistency make this anyone's championship.</div>
+      <a href="https://racerxonline.com/2026/02/06/racerhead-6" target="_blank" style="font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--grn);text-decoration:none;margin-top:4px;display:inline-block">Read on Racer X →</a>
+    </div>
+
+    <div class="news-i">
+      <div class="news-src">NBC Sports &middot; Post-Race</div>
+      <div class="news-hl">Roczen: "I knew it was going to be a long main — this track was tricky"</div>
+      <div class="news-sub">Roczen told Peacock's Will Christien that Friese cut him off in T1 or he'd have gotten the holeshot. His 7th consecutive season with a victory — one of the most remarkable longevity stories in SX history.</div>
+      <a href="https://www.nbcsports.com/motor-sports/news/2026-supermotocross-round-5-glendale-450-updates" target="_blank" style="font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--grn);text-decoration:none;margin-top:4px;display:inline-block">Read on NBC Sports →</a>
+    </div>
+
+    <div class="news-i">
+      <div class="news-src">Racer X &middot; Qualifying</div>
+      <div class="news-hl">Prado edges Tomac by 0.009s for fastest qualifier — Tomac's secret quad line</div>
+      <div class="news-sub">Prado's 56.451 topped qualifying. Tomac found a quad line before the mechanics area nobody else was doing — going four-one through the longest rhythm lane. He shorted it a lap later and blew off the track.</div>
+      <a href="https://racerxonline.com/2026/02/07/live-written-updates-and-results-from-glendale-supercross" target="_blank" style="font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--grn);text-decoration:none;margin-top:4px;display:inline-block">Read on Racer X →</a>
+    </div>
+
+    <div class="news-i">
+      <div class="news-src">Racer X &middot; Racerhead #6</div>
+      <div class="news-hl">Houston Triple Crown: 3 different race winners, 4th rider takes overall</div>
+      <div class="news-sub">Roczen, Lawrence, and Tomac each won a sprint race, but Webb (4-2-3) won the overall without winning a single main. His 6th career Triple Crown win — 2nd most all-time. Classic Webby performance as the track deteriorated.</div>
+      <a href="https://racerxonline.com/2026/02/06/racerhead-6" target="_blank" style="font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--grn);text-decoration:none;margin-top:4px;display:inline-block">Read on Racer X →</a>
+    </div>
+
+    <div class="news-i">
+      <div class="news-src">Supercrosslive.com &middot; Stats</div>
+      <div class="news-hl">Glendale's "winner's curse" — only Tomac ('22) won here and took the title the same year</div>
+      <div class="news-sub">The Glendale winner has failed to win the championship in 8 of 9 seasons, including Sexton's 2025 Triple Crown win. Arizona has hosted 31 premier class rounds since the 1980s.</div>
+      <a href="https://www.supercrosslive.com/news/storylines-entering-glendale-this-week-in-smx/" target="_blank" style="font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--grn);text-decoration:none;margin-top:4px;display:inline-block">Read on Supercrosslive.com →</a>
+    </div>
+
+    <div class="news-i">
+      <div class="news-src">Racer X &middot; Track Preview</div>
+      <div class="news-hl">State Farm Stadium — biggest floor of the year with long start straight</div>
+      <div class="news-sub">Glendale offers the largest stadium floor in the series. The start straight is incorporated into every lap. Track surface is hard and dry — typical Arizona dirt. Inside sand line was the fast qualifying line.</div>
+      <a href="https://racerxonline.com/2026/02/05/what-does-the-glendale-sx-supercross-layout-look-like-watch-track-map-video" target="_blank" style="font-family:'Barlow Condensed';font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--grn);text-decoration:none;margin-top:4px;display:inline-block">Read on Racer X →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ INJURIES ============ -->
+<div class="panel" id="p-injuries">
+  <div class="card" style="margin-top:14px">
+    <div class="card-h"><div><div class="card-t">Injury Report</div><div class="card-s">Post-R5 Glendale &middot; Updated Feb 7 &middot; Sources: Racer X, MXA, Vurb Moto</div></div></div>
+
+    <div style="padding:10px 14px;font-family:'Barlow Condensed';font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--brd);background:var(--bg3)">450SX Class</div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--hon)"></span>Jett Lawrence <span class="inj-num">#18</span></div><span class="inj-s inj-out">Season</span></div>
+      <div class="inj-detail">Fractured talus & navicular (right ankle/foot) — pre-season training crash, Dec 2025</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> Pro Motocross (May 2026) — 3+ month recovery typical for complex foot fractures. Non-weight bearing ~8 weeks followed by rehab.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--duc)"></span>Justin Barcia <span class="inj-num">#51</span></div><span class="inj-s inj-out">Out</span></div>
+      <div class="inj-detail">Concussion + two broken bones in back — landed on Malcolm Stewart at A1 (Jan 10). Back on bicycle as of Feb 5.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> R9–R11 (March–April) — vertebral fractures without surgery typically 8–12 weeks. Concussion protocol adds variable time. Riding a bike is positive sign.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--husq)"></span>RJ Hampshire <span class="inj-num">#24</span></div><span class="inj-s inj-out">DNS</span></div>
+      <div class="inj-detail">Severe head cold / illness — pulled out during qualifying at Glendale</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> R6 Seattle (Feb 14) — likely 1-week illness recovery.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--husq)"></span>Malcolm Stewart <span class="inj-num">#27</span></div><span class="inj-s inj-out">DNF</span></div>
+      <div class="inj-detail">Retired after 10 laps at Glendale — possible mechanical or crash. Status TBD for Seattle.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> R6 Seattle (Feb 14) — likely race-ready barring unreported injury.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--hon)"></span>Joey Savatgy <span class="inj-num">#17</span></div><span class="inj-s inj-ok">Racing</span></div>
+      <div class="inj-detail">Broken big toe — crash in Houston Triple Crown Race 1 (Jan 31). Still racing, finished P6 at Glendale.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> Currently active — toe fractures typically 4–6 weeks to full heal. Managing pain while racing.</div>
+    </div>
+
+    <div style="padding:10px 14px;font-family:'Barlow Condensed';font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--brd);background:var(--bg3)">250SX Class</div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--hon)"></span>Chance Hymas <span class="inj-num">#29</span></div><span class="inj-s inj-out">Out — Surgery</span></div>
+      <div class="inj-detail">Dislocated left shoulder + labrum tear — A2 first-turn pileup (Jan 24). Had labrum repair surgery Jan 31.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> Pro Motocross (May 2026) — labrum repair is 4–6 months recovery. Team confirmed 8 weeks minimum, but focusing on outdoors. SX season over.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--hon)"></span>Jo Shimoda <span class="inj-num">#30</span></div><span class="inj-s inj-out">Out</span></div>
+      <div class="inj-detail">Fractured & displaced two vertebrae (upper back/lower neck) — training crash, late November 2025.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> ~R7 Arlington (Feb 22) per Honda HRC — displaced vertebral fractures typically 10–14 weeks. Lars Lindstrom "pretty confident" he returns before season's end.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--ktm)"></span>Austin Forkner <span class="inj-num">#33</span></div><span class="inj-s inj-out">Out</span></div>
+      <div class="inj-detail">Fractured left hand — Houston press day crash (Jan 30). In a cast for 2 weeks, assessed week-by-week per Triumph.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> R7–R8 (Feb 22 – Mar 7) — hand fractures typically 4–6 weeks. Cast off ~Feb 13, then needs to regain grip strength. Aggressive target is Arlington.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--kaw)"></span>Jack Chambers <span class="inj-num">#?</span></div><span class="inj-s inj-out">Out</span></div>
+      <div class="inj-detail">Broken wrist — training crash, mid-January. Per trainer Zach Osborne: "eight or nine weeks."</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> R10–R11 (Mar 21 – Mar 28) — per team's 8–9 week estimate from ~Jan 15 injury date.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--kaw)"></span>Ty Freehill <span class="inj-num">#?</span></div><span class="inj-s inj-out">Out</span></div>
+      <div class="inj-detail">Broken & dislocated wrist — A2 heat race crash (Jan 24). Had surgery.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> R10+ (Mar 21+) — surgical wrist repair typically 8–12 weeks. Complex dislocation + fracture combo extends timeline.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--yam)"></span>Cole Bourdon <span class="inj-num">#?</span></div><span class="inj-s inj-out">Season</span></div>
+      <div class="inj-detail">Ligament damage + multiple fractures in BOTH wrists — training crash.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> Pro Motocross at earliest — bilateral wrist injuries with ligament damage typically 4–6 months. SX season over per team.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--yam)"></span>Julien Beaumer <span class="inj-num">#?</span></div><span class="inj-s inj-out">Season</span></div>
+      <div class="inj-detail">Burst fracture to L3 vertebra — 2025 SMX Playoffs crash.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> Pro Motocross (May 2026) — L3 burst fractures are 6–12 month recovery. Sitting out all of SX per team. Targeting outdoor return.</div>
+    </div>
+
+    <div style="padding:10px 14px;font-family:'Barlow Condensed';font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);border-bottom:1px solid var(--brd);background:var(--bg3)">Other Notables</div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--ktm)"></span>Benny Bloss <span class="inj-num">#?</span></div><span class="inj-s inj-out">Out</span></div>
+      <div class="inj-detail">Broken wrist — A1 press day crash. Beta Racing withdrawing from SX to focus on Pro Motocross.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> Pro Motocross (May 2026) — 5–6 week wrist recovery but team shifting focus to outdoors.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--ktm)"></span>Kyle Clason <span class="inj-num">#?</span></div><span class="inj-s inj-out">Out</span></div>
+      <div class="inj-detail">Collarbone broken in 3 pieces — Houston crash (Jan 31).</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> R9–R10 (Mar 14 – Mar 21) — complex collarbone fractures with plating surgery typically 6–8 weeks.</div>
+    </div>
+
+    <div class="inj-full">
+      <div class="inj-hdr"><div class="inj-n"><span class="bd" style="background:var(--husq)"></span>Jordon Smith <span class="inj-num">#?</span></div><span class="inj-s inj-out">Out</span></div>
+      <div class="inj-detail">Shoulder surgery — injury from 2025 SMX World Championship final round.</div>
+      <div class="inj-recov"><span class="inj-icon">⏱</span> <strong>Est. return:</strong> ~R7 Arlington (Feb 22) — per team, expected back around round 7. Would debut Triumph 450.</div>
+    </div>
   </div>
 
   <div class="card" style="margin-top:12px">
-    <div class="card-h"><div class="card-t">Headlines</div></div>
-    <div class="news-i"><div class="news-src">Race Recap</div><div class="news-hl">Roczen stuns with wire-to-wire win — Tomac fades to P12</div><div class="news-sub">Ken Roczen led flag-to-flag with the fastest lap of the night (56.700). Eli Tomac, the points leader coming in, had his worst finish of the season.</div></div>
-    <div class="news-i"><div class="news-src">Championship Shakeup</div><div class="news-hl">Hunter Lawrence takes the red plate — new 450 points leader</div><div class="news-sub">Lawrence's consistent P2 finish (4th podium in 5 rounds) vaults him to 106 pts, 5 ahead of Roczen. Tomac drops to 3rd, 8 back.</div></div>
-    <div class="news-i"><div class="news-src">250 Dominance</div><div class="news-hl">Deegan makes it 4 straight — 250 title race is over early</div><div class="news-sub">Haiden Deegan won his 4th consecutive main event, extending his lead to 27 points over Mosiman with 4 West rounds remaining.</div></div>
-    <div class="news-i"><div class="news-src">Stat of the Night</div><div class="news-hl">5 different 450 winners in 5 rounds — most parity since 2009</div><div class="news-sub">Tomac (R1-R2), Sexton (R3), Webb (R4), Roczen (R5). No rider has won twice since Round 2.</div></div>
+    <div class="card-h"><div class="card-t">Recovery Timeline</div><div class="card-s">Estimated based on injury type + team statements</div></div>
+    <div style="padding:14px;font-family:'Barlow';font-size:11px;color:var(--t2);line-height:1.8">
+      <div style="margin-bottom:8px">🟢 <strong>R6 Seattle (Feb 14):</strong> Hampshire, M. Stewart likely back</div>
+      <div style="margin-bottom:8px">🟡 <strong>R7 Arlington (Feb 22):</strong> Forkner (aggressive), Shimoda, J. Smith possible returns</div>
+      <div style="margin-bottom:8px">🟡 <strong>R8–R9 (Mar 7–14):</strong> Forkner (realistic)</div>
+      <div style="margin-bottom:8px">🟠 <strong>R9–R11 (Mar 14–28):</strong> Barcia, Clason, Chambers targeted returns</div>
+      <div style="margin-bottom:8px">🔴 <strong>Pro MX (May):</strong> Jett Lawrence, Hymas, Bourdon, Beaumer, Bloss — SX season over</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ RIDERS ============ -->
+<div class="panel" id="p-riders">
+  <div class="cls-tog">
+    <button class="cls-b c4 active" onclick="setCls('4')">450SX</button>
+    <button class="cls-b c2" onclick="setCls('2')">250SX</button>
+  </div>
+
+  <div class="show4">
+    <div class="card"><div class="card-h"><div class="card-t">450SX — Top 10 in Points</div><div class="card-s">Meet the riders</div></div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos" style="color:var(--grn)">1</div><div><div class="rider-name"><span class="bd" style="background:var(--hon)"></span>Hunter Lawrence</div><div class="rider-team">Team Honda HRC Progressive &middot; #96 &middot; 🇦🇺</div></div></div>
+      <div class="rider-bio">2023 250SX East Champion, 2x MXoN winner with Team Australia. Older brother of Jett Lawrence. 4 podiums in 5 rounds — the most consistent rider of 2026 without a win yet.</div>
+      <div class="rider-links"><a href="https://instagram.com/hunterlawrence" target="_blank">IG</a><a href="https://x.com/hunterlawrence" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos" style="color:var(--grn)">2</div><div><div class="rider-name"><span class="bd" style="background:var(--suz)"></span>Ken Roczen</div><div class="rider-team">Progressive Insurance Suzuki &middot; #94 &middot; 🇩🇪</div></div></div>
+      <div class="rider-bio">2-time 450SX champion and one of the most naturally talented riders in history. Overcame career-threatening arm injuries. Won Glendale with the fastest lap of the night (56.700).</div>
+      <div class="rider-links"><a href="https://instagram.com/kenroczen94" target="_blank">IG</a><a href="https://x.com/kenroczen94" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos" style="color:var(--grn)">3</div><div><div class="rider-name"><span class="bd" style="background:var(--ktm)"></span>Eli Tomac</div><div class="rider-team">Red Bull KTM &middot; #1 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">4x Supercross champion, 4x Motocross champion — one of the most decorated riders ever. Won R1-R2 this season but crashed at Glendale T1 and dropped to P12. Arizona resident.</div>
+      <div class="rider-links"><a href="https://instagram.com/elitomac" target="_blank">IG</a><a href="https://x.com/elitomac" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">4</div><div><div class="rider-name"><span class="bd" style="background:var(--yam)"></span>Cooper Webb</div><div class="rider-team">Monster Energy Yamaha Star Racing &middot; #2 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">6x SX/MX champion and defending 2025 Supercross champion. Master of late-race pressure and Triple Crown formats — won Houston R4 without winning a single sprint.</div>
+      <div class="rider-links"><a href="https://instagram.com/cooperwebb2" target="_blank">IG</a><a href="https://x.com/cooperwebb_2" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">5</div><div><div class="rider-name"><span class="bd" style="background:var(--kaw)"></span>Chase Sexton</div><div class="rider-team">Monster Energy Kawasaki &middot; #4 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">2024 Motocross champion who made history as Kawasaki's first 450 factory signing in years. Won at Anaheim 2 for his first 450SX victory. La Moille, Illinois native.</div>
+      <div class="rider-links"><a href="https://instagram.com/chasesexton1" target="_blank">IG</a><a href="https://x.com/chasesexton_" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">6</div><div><div class="rider-name"><span class="bd" style="background:var(--yam)"></span>Justin Cooper</div><div class="rider-team">Monster Energy Yamaha Star Racing &middot; #32 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">2x 250SX champion making his mark in the premier class. Cold Spring Harbor, New York native. Finding his groove on the 450 platform with improving results each round.</div>
+      <div class="rider-links"><a href="https://instagram.com/justincooper_32" target="_blank">IG</a><a href="https://x.com/jcooper_32" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">7</div><div><div class="rider-name"><span class="bd" style="background:var(--ktm)"></span>Jorge Prado</div><div class="rider-team">Red Bull KTM &middot; #61 &middot; 🇪🇸</div></div></div>
+      <div class="rider-bio">2x MXGP World Champion from Spain making his first full SX campaign. Elite starter — fastest qualifier at Glendale (56.451). Learning the American stadium game fast.</div>
+      <div class="rider-links"><a href="https://instagram.com/jorgeprado61" target="_blank">IG</a><a href="https://x.com/jorgeprado61" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">8</div><div><div class="rider-name"><span class="bd" style="background:var(--suz)"></span>Jason Anderson</div><div class="rider-team">Progressive Insurance Suzuki &middot; #21 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">2018 450SX champion, Rio Rancho, New Mexico native. Known for his aggressive riding style and bar-to-bar battles. Had a fierce fight with Roczen in the Glendale heat race.</div>
+      <div class="rider-links"><a href="https://instagram.com/elhombre21" target="_blank">IG</a><a href="https://x.com/jaboracing" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">9</div><div><div class="rider-name"><span class="bd" style="background:var(--hon)"></span>Joey Savatgy</div><div class="rider-team">Quad Lock Honda &middot; #17 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">Experienced veteran enjoying a career resurgence on the Honda. Raced Glendale with a broken big toe from Houston and still finished P6 — tough as nails.</div>
+      <div class="rider-links"><a href="https://instagram.com/joey_savatgy" target="_blank">IG</a><a href="https://x.com/JoeySavatgy" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">10</div><div><div class="rider-name"><span class="bd" style="background:var(--duc)"></span>Dylan Ferrandis</div><div class="rider-team">Ducati Factory Racing &middot; #14 &middot; 🇫🇷</div></div></div>
+      <div class="rider-bio">Former 250MX and 250SX champion from France. Piloting Ducati's debut factory SX effort — first-ever Ducati in AMA Supercross history. Quietly consistent in the top 10.</div>
+      <div class="rider-links"><a href="https://instagram.com/dylanferrandis" target="_blank">IG</a><a href="https://x.com/DylanFerrandis" target="_blank">X</a></div>
+    </div>
+
+    </div>
+  </div>
+
+  <div class="show2" style="display:none">
+    <div class="card"><div class="card-h"><div class="card-t">250SX West — Top 10 in Points</div><div class="card-s">Meet the riders</div></div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos" style="color:var(--yel)">1</div><div><div class="rider-name"><span class="bd" style="background:var(--yam)"></span>Haiden Deegan</div><div class="rider-team">Monster Energy Yamaha Star Racing &middot; #38 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">Son of FMX legend Brian Deegan. Loretta Lynn's amateur champion turned 250 class dominant force — 4 consecutive wins and a 27-point lead. Only 19 years old.</div>
+      <div class="rider-links"><a href="https://instagram.com/haidendeegan" target="_blank">IG</a><a href="https://x.com/HaidenDeegan" target="_blank">X</a><a href="https://youtube.com/@HaidenDeegan" target="_blank">YT</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos" style="color:var(--yel)">2</div><div><div class="rider-name"><span class="bd" style="background:var(--yam)"></span>Michael Mosiman</div><div class="rider-team">GasGas/Yamaha &middot; #62 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">Northern California native and consistent podium contender. Multiple years of 250 experience — quietly putting together his strongest championship bid.</div>
+      <div class="rider-links"><a href="https://instagram.com/michaelmosiman" target="_blank">IG</a><a href="https://x.com/michaelmosiman" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos" style="color:var(--yel)">3</div><div><div class="rider-name"><span class="bd" style="background:var(--husq)"></span>Ryder DiFrancesco</div><div class="rider-team">Rockstar Energy Husqvarna &middot; #48 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">Bakersfield, California product and Loretta Lynn's multi-time champion. Strong amateur pedigree translating to pro consistency — podium at A1 and steady top-5 finishes.</div>
+      <div class="rider-links"><a href="https://instagram.com/ryderdifrancesco" target="_blank">IG</a><a href="https://x.com/rikirockyrd" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">4</div><div><div class="rider-name"><span class="bd" style="background:var(--yam)"></span>Max Anstie</div><div class="rider-team">Monster Energy Yamaha Star Racing &middot; #77 &middot; 🇬🇧</div></div></div>
+      <div class="rider-bio">British veteran with MXGP podium experience. Won the season opener at Anaheim 1. Brings European grit and experience to the 250 West field.</div>
+      <div class="rider-links"><a href="https://instagram.com/maxanstie" target="_blank">IG</a><a href="https://x.com/maxanstie" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">5</div><div><div class="rider-name"><span class="bd" style="background:var(--kaw)"></span>Cameron McAdoo</div><div class="rider-team">Monster Energy Pro Circuit Kawasaki &middot; #36 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">Iowa native and Pro Circuit veteran with multiple SX podiums. Known for his heart and never-give-up style. Moved up to P3 at Glendale after charging through the pack.</div>
+      <div class="rider-links"><a href="https://instagram.com/cameronmcadoo" target="_blank">IG</a><a href="https://x.com/CamMcAdoo" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">6</div><div><div class="rider-name"><span class="bd" style="background:var(--kaw)"></span>Levi Kitchen</div><div class="rider-team">Monster Energy Pro Circuit Kawasaki &middot; #47 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">Washington state talent and Loretta Lynn's champion. Breakout speed — fastest 250 heat race lap at Glendale (58.024). Charged from outside top 5 to P2 in the main.</div>
+      <div class="rider-links"><a href="https://instagram.com/levikitchen47" target="_blank">IG</a><a href="https://x.com/levikitchen47" target="_blank">X</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">7</div><div><div class="rider-name"><span class="bd" style="background:var(--yam)"></span>Maximus Vohland</div><div class="rider-team">Monster Energy Yamaha Star Racing &middot; #80 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">Son of former factory rider Tallon Vohland. Surprise heat race winner at Glendale. Young talent finding his footing in the 250 class with flashes of brilliance.</div>
+      <div class="rider-links"><a href="https://instagram.com/maximusvohland" target="_blank">IG</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">8</div><div><div class="rider-name"><span class="bd" style="background:var(--yam)"></span>Hunter Yoder</div><div class="rider-team">Monster Energy Yamaha Star Racing &middot; #79 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">Rising amateur standout making the jump to pro. Part of Yamaha's deep Star Racing pipeline — consistently inside the top 10 through five rounds.</div>
+      <div class="rider-links"><a href="https://instagram.com/hunteryoder" target="_blank">IG</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">9</div><div><div class="rider-name"><span class="bd" style="background:var(--yam)"></span>Parker Ross</div><div class="rider-team">ClubMX Yamaha &middot; #72 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">South Carolina-based ClubMX product. Privateer-turned-team-rider earning his way through consistent main event results and smart racing.</div>
+      <div class="rider-links"><a href="https://instagram.com/parkerross72" target="_blank">IG</a></div>
+    </div>
+
+    <div class="rider-card">
+      <div class="rider-top"><div class="rider-pos">10</div><div><div class="rider-name"><span class="bd" style="background:var(--ktm)"></span>Avery Long</div><div class="rider-team">KTM &middot; #63 &middot; 🇺🇸</div></div></div>
+      <div class="rider-bio">Young privateer effort grinding out results week after week. Representing the next generation of KTM 250 talent in the West Coast series.</div>
+      <div class="rider-links"><a href="https://instagram.com/averylong" target="_blank">IG</a></div>
+    </div>
+
+    </div>
   </div>
 </div>
 
@@ -448,40 +831,63 @@ function stab(el,id){
 
 // STANDINGS BARS
 var bk={'KTM':'#ff6b00','Honda':'#cc0000','Suzuki':'#ffd200','Kawasaki':'#00a033','Yamaha':'#0055d4','Husqvarna':'#bbbbbb','Ducati':'#cc0000'};
-var s450=[{n:'Hunter Lawrence',b:'Honda',p:106},{n:'Ken Roczen',b:'Suzuki',p:101},{n:'Eli Tomac',b:'KTM',p:98},{n:'Cooper Webb',b:'Yamaha',p:91},{n:'Chase Sexton',b:'Kawasaki',p:89},{n:'Justin Cooper',b:'Yamaha',p:75},{n:'Jorge Prado',b:'KTM',p:73},{n:'Jason Anderson',b:'Suzuki',p:73},{n:'Joey Savatgy',b:'Honda',p:66},{n:'Dylan Ferrandis',b:'Ducati',p:62},{n:'Aaron Plessinger',b:'KTM',p:50},{n:'Christian Craig',b:'Honda',p:45},{n:'Justin Hill',b:'KTM',p:40},{n:'RJ Hampshire',b:'Husqvarna',p:38},{n:'Malcolm Stewart',b:'Husqvarna',p:36},{n:'Colt Nichols',b:'Suzuki',p:34}];
-var s250=[{n:'Haiden Deegan',b:'Yamaha',p:118},{n:'Michael Mosiman',b:'Yamaha',p:91},{n:'Ryder DiFrancesco',b:'Husqvarna',p:89},{n:'Max Anstie',b:'Yamaha',p:88},{n:'Cameron McAdoo',b:'Kawasaki',p:80},{n:'Levi Kitchen',b:'Kawasaki',p:79},{n:'Maximus Vohland',b:'Yamaha',p:77},{n:'Hunter Yoder',b:'Yamaha',p:60},{n:'Parker Ross',b:'Yamaha',p:57},{n:'Avery Long',b:'KTM',p:49}];
+var s450=[{n:'Hunter Lawrence',b:'Honda',p:106},{n:'Ken Roczen',b:'Suzuki',p:101},{n:'Eli Tomac',b:'KTM',p:98},{n:'Cooper Webb',b:'Yamaha',p:91},{n:'Chase Sexton',b:'Kawasaki',p:89},{n:'Justin Cooper',b:'Yamaha',p:75},{n:'Jorge Prado',b:'KTM',p:73},{n:'Jason Anderson',b:'Suzuki',p:73},{n:'Joey Savatgy',b:'Honda',p:66},{n:'Dylan Ferrandis',b:'Ducati',p:62},{n:'Aaron Plessinger',b:'KTM',p:50},{n:'Christian Craig',b:'Honda',p:45},{n:'Justin Hill',b:'KTM',p:40},{n:'RJ Hampshire',b:'Husqvarna',p:38},{n:'Malcolm Stewart',b:'Husqvarna',p:36},{n:'Colt Nichols',b:'Suzuki',p:34},{n:'Vince Friese',b:'Kawasaki',p:30},{n:'Garrett Marchbanks',b:'Kawasaki',p:28},{n:'Shane McElrath',b:'Honda',p:24},{n:'Freddie Noren',b:'Yamaha',p:20},{n:'Grant Harlan',b:'KTM',p:16},{n:'Mitchell Harrison',b:'Kawasaki',p:12}];
+var s250=[{n:'Haiden Deegan',b:'Yamaha',p:118},{n:'Michael Mosiman',b:'Yamaha',p:91},{n:'Ryder DiFrancesco',b:'Husqvarna',p:89},{n:'Max Anstie',b:'Yamaha',p:88},{n:'Cameron McAdoo',b:'Kawasaki',p:80},{n:'Levi Kitchen',b:'Kawasaki',p:79},{n:'Maximus Vohland',b:'Yamaha',p:77},{n:'Hunter Yoder',b:'Yamaha',p:60},{n:'Parker Ross',b:'Yamaha',p:57},{n:'Avery Long',b:'KTM',p:49},{n:'Carson Mumford',b:'Yamaha',p:38},{n:'Cole Thompson',b:'Husqvarna',p:35},{n:'Jordon Turner',b:'KTM',p:33},{n:'Josh Varize',b:'Yamaha',p:28},{n:'Robbie Wageman',b:'Husqvarna',p:24},{n:'Derek Kelley',b:'KTM',p:18}];
 
 function buildBars(id,data){
-  var c=document.getElementById(id);if(!c)return;c.innerHTML='';
+  var c=document.getElementById(id);if(!c)return;
+  // Keep header row (first child), clear the rest
+  while(c.children.length>1) c.removeChild(c.lastChild);
   var ldr=data[0].p;
   data.forEach(function(r,i){
-    var pct=Math.max(15,(r.p/ldr)*100);
     var col=bk[r.b]||'#888';
-    var gap=i===0?'<span style="color:#6cff00;font-size:9px;font-family:Oswald;letter-spacing:1px">LEADER</span>':'<span style="color:#5a5c68;font-size:10px">−'+(ldr-r.p)+'</span>';
-    c.innerHTML+='<div class="bar-item"><div class="bar-top"><div class="bar-name"><span style="font-family:Oswald;font-weight:700;color:'+(i<3?'#6cff00':'#5a5c68')+';margin-right:5px;display:inline-block;width:16px">'+(i+1)+'</span><span class="bd" style="background:'+col+'"></span>'+r.n+'</div><div>'+gap+' <span class="bar-pts">'+r.p+'</span></div></div><div class="bar-track"><div class="bar-fill" data-w="'+pct+'" style="background:'+col+'"></div></div></div>';
+    var gap=i===0?'<span style="color:var(--grn);font-family:Oswald;font-size:10px;letter-spacing:1px">LEADER</span>':'<span class="bar-gap">−'+(ldr-r.p)+'</span>';
+    var top3=i<3?' top-3':'';
+    var d=document.createElement('div');
+    d.className='bar-item'+top3;
+    d.innerHTML=
+      '<div class="bar-pos" style="color:'+(i<3?'var(--grn)':'var(--t3)')+'">'+(i+1)+'</div>'+
+      '<span class="bd" style="background:'+col+'"></span>'+
+      '<div class="bar-name">'+r.n+'</div>'+
+      gap+
+      '<div class="bar-pts">'+r.p+'</div>';
+    c.appendChild(d);
   });
-  setTimeout(function(){c.querySelectorAll('.bar-fill').forEach(function(b){b.style.width=b.dataset.w+'%'})},100);
 }
 buildBars('bars450',s450);
 buildBars('bars250',s250);
 
 // ARCHIVE
 var archiveData={
-  1:{city:'Anaheim 1',date:'Jan 10',venue:'Angel Stadium',story:'Tomac dominated wire-to-wire in season opener. Roczen P2 by just 1.4 seconds.',
-    r450:[['Tomac','KTM'],['Roczen','Suzuki'],['Prado','KTM'],['H. Lawrence','Honda'],['Anderson','Suzuki']],
-    r250:[['Anstie','Yamaha'],['Hymas','Honda'],['DiFrancesco','Husqvarna'],['Deegan','Yamaha'],['Mosiman','Yamaha']]},
-  2:{city:'San Diego',date:'Jan 17',venue:'Snapdragon Stadium',story:'Tomac goes back-to-back. Lawrence climbs to P2 in points with 2nd podium.',
-    r450:[['Tomac','KTM'],['H. Lawrence','Honda'],['Roczen','Suzuki'],['Sexton','Kawasaki'],['Savatgy','Honda']],
-    r250:[['Deegan','Yamaha'],['McAdoo','Kawasaki'],['Mosiman','Yamaha'],['Kitchen','Kawasaki'],['Anstie','Yamaha']]},
-  3:{city:'Anaheim 2',date:'Jan 24',venue:'Angel Stadium',story:'Sexton breaks through for 1st win. Lawrence P2 again — Mr. Consistent.',
-    r450:[['Sexton','Kawasaki'],['H. Lawrence','Honda'],['Tomac','KTM'],['Anderson','Suzuki'],['Webb','Yamaha']],
-    r250:[['Deegan','Yamaha'],['Mosiman','Yamaha'],['DiFrancesco','Husqvarna'],['McAdoo','Kawasaki'],['Vohland','Yamaha']]},
-  4:{city:'Houston',date:'Jan 31',venue:'NRG Stadium',story:'Webb wins the Triple Crown. 3 different winners in 4 rounds. Lawrence P2 yet again.',
-    r450:[['Webb','Yamaha'],['H. Lawrence','Honda'],['Roczen','Suzuki'],['Tomac','KTM'],['Sexton','Kawasaki']],
-    r250:[['Deegan','Yamaha'],['Kitchen','Kawasaki'],['McAdoo','Kawasaki'],['Vohland','Yamaha'],['DiFrancesco','Husqvarna']]},
-  5:{city:'Glendale',date:'Feb 7',venue:'State Farm Stadium',story:'Roczen stuns! Tomac collapses to P12. Lawrence inherits red plate. 4 different winners in 5 rounds.',
-    r450:[['Roczen','Suzuki'],['H. Lawrence','Honda'],['Webb','Yamaha'],['J. Cooper','Yamaha'],['Prado','KTM']],
-    r250:[['Deegan','Yamaha'],['Kitchen','Kawasaki'],['McAdoo','Kawasaki'],['Mosiman','Yamaha'],['DiFrancesco','Husqvarna']]}
+  1:{city:'Anaheim 1',date:'Jan 10',venue:'Angel Stadium',story:'Tomac dominated wire-to-wire after red flag restart (Barcia landed on Malcolm Stewart). Prado grabbed holeshot but Tomac took the lead on lap 1 and never looked back. Roczen charged to P2 within 1.4s. Barcia airlifted — broken vertebrae.',hc450:'Aaron Plessinger (+8 positions)',hc250:'Parker Ross (+7 positions)',
+    r450:[['Tomac','KTM'],['Roczen','Suzuki'],['Prado','KTM'],['H. Lawrence','Honda'],['Anderson','Suzuki'],['J. Cooper','Yamaha'],['Webb','Yamaha'],['Sexton','Kawasaki'],['Ferrandis','Ducati'],['Plessinger','KTM'],['Craig','Honda'],['Nichols','Suzuki'],['Savatgy','Honda'],['Hill','KTM'],['Hampshire','Husqvarna'],['Forkner','Triumph'],['Oldenburg','Beta'],['McElrath','Honda'],['Friese','Kawasaki'],['Marchbanks','Kawasaki'],['Harrison','Kawasaki'],['Harlan','KTM']],
+    r250:[['Anstie','Yamaha'],['Hymas','Honda'],['DiFrancesco','Husqvarna'],['Deegan','Yamaha'],['Mosiman','Yamaha'],['Kitchen','Kawasaki'],['Vohland','Yamaha'],['Yoder','Yamaha'],['Long','KTM'],['Schwartz','Yamaha'],['Mumford','KTM'],['Ross','Yamaha'],['Bourdon','Kawasaki'],['Turner','Yamaha'],['Varize','Kawasaki'],['Wageman','Yamaha'],['Myers','Suzuki'],['Jorgensen','Honda'],['Rodbell','Honda'],['Ray','Triumph'],['Camporese','Kawasaki'],['McAdoo','Kawasaki']]},
+  2:{city:'San Diego',date:'Jan 17',venue:'Snapdragon Stadium',story:'Tomac goes back-to-back after last-lap battle with Lawrence. Lawrence holeshoted and led 7 laps before Roczen took over. Tomac reclaimed lead lap 16. Sexton hit the gate — started dead last, charged to P4. Deegan aggressively took Anstie down for the lead.',hc450:'Chase Sexton (+14 positions — dead last to P4 after gate stuck)',hc250:'Cameron McAdoo (+6 positions)',
+    r450:[['Tomac','KTM'],['H. Lawrence','Honda'],['Roczen','Suzuki'],['Sexton','Kawasaki'],['Savatgy','Honda'],['J. Cooper','Yamaha'],['Plessinger','KTM'],['Webb','Yamaha'],['Ferrandis','Ducati'],['Stewart','Husqvarna'],['Anderson','Suzuki'],['Hampshire','Husqvarna'],['Prado','KTM'],['Hill','KTM'],['Craig','Honda'],['Nichols','Suzuki'],['Friese','Kawasaki'],['McElrath','Honda'],['Moranz','KTM'],['Harrison','Kawasaki'],['Harlan','KTM'],['Miller','Kawasaki']],
+    r250:[['Deegan','Yamaha'],['McAdoo','Kawasaki'],['Mosiman','Yamaha'],['Kitchen','Kawasaki'],['Anstie','Yamaha'],['Hymas','Honda'],['DiFrancesco','Husqvarna'],['Vohland','Yamaha'],['Schwartz','Yamaha'],['Bourdon','Kawasaki'],['Ross','Yamaha'],['Long','KTM'],['Turner','Yamaha'],['Mumford','KTM'],['Schlosser','Honda'],['Camporese','Kawasaki'],['Shive','Honda'],['Masciangelo','Honda'],['Varize','Kawasaki'],['Freehill','Honda'],['Yoder','Yamaha'],['Wageman','Yamaha']]},
+  3:{city:'Anaheim 2',date:'Jan 24',venue:'Angel Stadium',story:'Sexton breaks through for 1st 450SX win on Kawasaki since Anderson 2022 SLC. Led start-to-finish after lap 3. Lawrence P2 again — 3 straight podiums. Hymas dislocated shoulder in T1 pileup — season likely over. Deegan makes it 2 straight with late-race pass on Mosiman.',hc450:'Ken Roczen (+14 positions — crashed lap 2 from P21 to P8)',hc250:'Levi Kitchen (+9 positions — DNF after T1 crash)',
+    r450:[['Sexton','Kawasaki'],['H. Lawrence','Honda'],['Tomac','KTM'],['Anderson','Suzuki'],['Webb','Yamaha'],['Savatgy','Honda'],['Prado','KTM'],['Roczen','Suzuki'],['Hampshire','Husqvarna'],['J. Cooper','Yamaha'],['Ferrandis','Ducati'],['Stewart','Husqvarna'],['Craig','Honda'],['Marchbanks','Kawasaki'],['Hill','KTM'],['Nichols','Suzuki'],['Forkner','Triumph'],['McElrath','Honda'],['Friese','Kawasaki'],['Harrison','Kawasaki'],['Breece','Honda'],['Plessinger','KTM']],
+    r250:[['Deegan','Yamaha'],['Mosiman','Yamaha'],['DiFrancesco','Husqvarna'],['McAdoo','Kawasaki'],['Vohland','Yamaha'],['Anstie','Yamaha'],['Yoder','Yamaha'],['Ross','Yamaha'],['Long','KTM'],['Mumford','KTM'],['Turner','Yamaha'],['Schwartz','Yamaha'],['Bourdon','Kawasaki'],['Wageman','Yamaha'],['Varize','Kawasaki'],['Schlosser','Honda'],['Camporese','Kawasaki'],['Rodbell','Honda'],['Shive','Honda'],['Masciangelo','Honda'],['Kitchen','Kawasaki'],['Hymas','Honda']]},
+  4:{city:'Houston',date:'Jan 31',venue:'NRG Stadium',tc:true,story:'Triple Crown! Webb wins overall (4-2-3) without winning a single sprint — edges Lawrence and Roczen by 1pt. Roczen won Race 1, Lawrence won Race 2, Tomac won Race 3. Tomac crashed hard in Race 2 (P13). Deegan swept all 3 races.',hc450:'Eli Tomac (+16 positions in Race 2 — crashed to P13, then won Race 3)',hc250:'Max Anstie (+8 in Race 1 — T1 pileup to P10, recovered to P2 in Race 3)',
+    r450:[['Webb','Yamaha'],['H. Lawrence','Honda'],['Roczen','Suzuki'],['Tomac','KTM'],['Sexton','Kawasaki'],['Anderson','Suzuki'],['Prado','KTM'],['Stewart','Husqvarna'],['J. Cooper','Yamaha'],['Ferrandis','Ducati'],['Hampshire','Husqvarna'],['Craig','Honda'],['Plessinger','KTM'],['Nichols','Suzuki'],['Hill','KTM'],['McElrath','Honda'],['Savatgy','Honda'],['Marchbanks','Kawasaki'],['Friese','Kawasaki'],['Noren','Yamaha'],['Harrison','Kawasaki'],['Harlan','KTM']],
+    r250:[['Deegan','Yamaha'],['Kitchen','Kawasaki'],['McAdoo','Kawasaki'],['Vohland','Yamaha'],['DiFrancesco','Husqvarna'],['Anstie','Yamaha'],['Mosiman','Yamaha'],['Yoder','Yamaha'],['Ross','Yamaha'],['Mumford','KTM'],['Turner','Yamaha'],['Long','KTM'],['Schwartz','Yamaha'],['Bourdon','Kawasaki'],['Varize','Kawasaki'],['Schlosser','Honda'],['Wageman','Yamaha'],['Rowley','Yamaha'],['Camporese','Kawasaki'],['Masciangelo','Honda'],['Shive','Honda'],['Rodbell','Honda']]},
+  5:{city:'Glendale',date:'Feb 7',venue:'State Farm Stadium',story:'Roczen stuns with wire-to-wire win! Tomac crashes in Turn 1 pileup with Craig and Nichols — recovers to only P12. Lawrence inherits red plate without a win. 4 different winners in 5 rounds. Deegan makes it 4 straight with bow-and-arrow celebration.',hc450:'Eli Tomac (+10 positions — dead last after T1 crash to P12)',hc250:'Levi Kitchen (+8 positions — started outside top 10, charged to P2)',
+    r450:[['Roczen','Suzuki'],['H. Lawrence','Honda'],['Webb','Yamaha'],['J. Cooper','Yamaha'],['Prado','KTM'],['Savatgy','Honda'],['Sexton','Kawasaki'],['Plessinger','KTM'],['Ferrandis','Ducati'],['Hill','KTM'],['Anderson','Suzuki'],['Tomac','KTM'],['Stewart','Husqvarna'],['Craig','Honda'],['Nichols','Suzuki'],['Hampshire','Husqvarna'],['Marchbanks','Kawasaki'],['Friese','Kawasaki'],['McElrath','Honda'],['Noren','Yamaha'],['Harrison','Kawasaki'],['Harlan','KTM']],
+    r250:[['Deegan','Yamaha'],['Kitchen','Kawasaki'],['McAdoo','Kawasaki'],['Mosiman','Yamaha'],['DiFrancesco','Husqvarna'],['Vohland','Yamaha'],['Yoder','Yamaha'],['Anstie','Yamaha'],['Long','KTM'],['Ross','Yamaha'],['Mumford','KTM'],['Turner','Yamaha'],['Schwartz','Yamaha'],['Bourdon','Kawasaki'],['Varize','Kawasaki'],['Wageman','Yamaha'],['Thompson','Husqvarna'],['Schlosser','Honda'],['Camporese','Kawasaki'],['Masciangelo','Honda'],['Kelley','KTM'],['Schwartz2','Yamaha']]}
+};
+var wxData={
+  6:{temp:'45°F',cond:'🌧️ Rain likely',detail:'Seattle in mid-Feb averages 45°F with 70% chance of rain. Indoor venue — no impact on racing but expect wet paddock.'},
+  7:{temp:'55°F',cond:'☁️ Partly cloudy',detail:'Arlington in late Feb averages 55°F. Indoor stadium — no weather impact. Could see gusty winds outside.'},
+  8:{temp:'70°F',cond:'☀️ Clear',detail:'Daytona in early March averages 70°F with low humidity. OUTDOOR track — weather is a factor. Dry conditions expected.'},
+  9:{temp:'48°F',cond:'☁️ Overcast',detail:'Indianapolis mid-March averages 48°F. Indoor dome — no weather impact on racing.'},
+  10:{temp:'62°F',cond:'🌤️ Warm',detail:'Birmingham late March averages 62°F. Indoor stadium — rain possible outside but no impact on racing.'},
+  11:{temp:'45°F',cond:'❄️ Cold',detail:'Detroit late March averages 45°F. Indoor dome — no weather impact. Could see snow outside.'},
+  12:{temp:'58°F',cond:'🌧️ Rain possible',detail:'St. Louis mid-April averages 58°F. Indoor dome — no weather impact on racing.'},
+  13:{temp:'65°F',cond:'🌤️ Pleasant',detail:'Nashville late April averages 65°F. OUTDOOR stadium — weather is a factor. Spring storms possible.'},
+  14:{temp:'55°F',cond:'☁️ Cool',detail:'Foxborough late April averages 55°F. OUTDOOR stadium — weather is a factor. Could be cold and windy.'},
+  15:{temp:'60°F',cond:'🌤️ Mild',detail:'Denver early May averages 60°F. OUTDOOR stadium at altitude — thin air affects bike tuning. Spring snow possible.'},
+  16:{temp:'65°F',cond:'☀️ Clear',detail:'Salt Lake City mid-May averages 65°F. OUTDOOR stadium — typically dry and pleasant. Low humidity.'},
+  17:{temp:'68°F',cond:'☀️ Clear',detail:'Salt Lake City mid-May averages 68°F. OUTDOOR stadium — excellent conditions expected for finale.'}
 };
 var mapBase='https://www.supercrosslive.com/wp-content/uploads/2025/';
 var mapNames={1:'09/Rd01_Anaheim_Overview01-1024x768.jpg',2:'09/Rd02_SanDiego_Overview01-1024x768.jpg',3:'09/Rd03_Anaheim_Overview01-1024x768.jpg',4:'09/Rd04_Houston_Overview01-1024x768.jpg',5:'09/Rd05_Glendale_Overview01-1024x768.jpg',6:'09/Rd06_Seattle_Overview01-1024x768.jpg',7:'09/Rd07_Arlington_Overview01-1024x768.jpg',8:'12/Rd08_Daytona_Overview01.png',9:'09/Rd09_Indianapolis_Overview01-1024x768.jpg',10:'09/Rd10_Birmingham_Overview01-1024x768.jpg',11:'09/Rd11_Detroit_Overview01-1024x768.jpg',12:'09/Rd12_StLouis_Overview01-1024x768.jpg',13:'09/Rd13_Nashville_Overview01-1024x768.jpg',14:'09/Rd14_Foxborough_Overview01-1024x768.jpg',15:'09/Rd15_Denver_Overview01-1024x768.jpg',16:'09/Rd16_SaltLakeCity_Overview01-1024x768.jpg',17:'09/Rd17_SaltLakeCity_Overview01-1024x768.jpg'};
@@ -501,31 +907,60 @@ function showRd(el,n){
       });
       return h;
     };
+    var hcHtml='';
+    if(d.hc450||d.hc250){
+      hcHtml='<div style="padding:10px 14px;border-top:1px solid var(--brd)">';
+      if(d.hc450) hcHtml+='<div style="font-family:Barlow;font-size:11px;margin-bottom:4px"><span style="background:var(--grn2);color:var(--grn);font-family:Oswald;font-size:9px;letter-spacing:1px;padding:2px 6px;border-radius:2px;margin-right:6px">HARD CHARGER 450</span>'+d.hc450+'</div>';
+      if(d.hc250) hcHtml+='<div style="font-family:Barlow;font-size:11px"><span style="background:var(--yel2);color:var(--yel);font-family:Oswald;font-size:9px;letter-spacing:1px;padding:2px 6px;border-radius:2px;margin-right:6px">HARD CHARGER 250</span>'+d.hc250+'</div>';
+      hcHtml+='</div>';
+    }
+    var tcBadge=d.tc?'<span style="display:inline-block;background:var(--yel2);color:var(--yel);font-family:Oswald;font-size:9px;letter-spacing:1px;padding:2px 6px;border-radius:2px;margin-left:6px">TRIPLE CROWN</span>':'';
     c.innerHTML=
-      '<div class="card" style="margin-top:8px"><div class="card-h"><div><div class="card-t">R'+n+' — '+d.city+'</div><div class="card-s">'+d.date+' &middot; '+d.venue+'</div></div><div class="tag tag-g">Complete</div></div>'+
+      '<div class="card" style="margin-top:8px"><div class="card-h"><div><div class="card-t">R'+n+' — '+d.city+tcBadge+'</div><div class="card-s">'+d.date+' &middot; '+d.venue+'</div></div><div class="tag tag-g">Complete</div></div>'+
       '<div style="padding:12px 14px;font-size:13px;color:var(--t2);border-bottom:1px solid var(--brd)">'+d.story+'</div>'+
+      hcHtml+
       '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0">'+
-        '<div style="border-right:1px solid var(--brd)"><div style="padding:8px 14px;font-family:Oswald;font-size:10px;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase;border-bottom:1px solid var(--brd)">450SX</div><table class="tbl"><tbody>'+podRow(d.r450,'')+'</tbody></table></div>'+
-        '<div><div style="padding:8px 14px;font-family:Oswald;font-size:10px;letter-spacing:1.5px;color:var(--yel);text-transform:uppercase;border-bottom:1px solid var(--brd)">250SX</div><table class="tbl"><tbody>'+podRow(d.r250,'')+'</tbody></table></div>'+
+        '<div style="border-right:1px solid var(--brd)"><div style="padding:8px 14px;font-family:Oswald;font-size:10px;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase;border-bottom:1px solid var(--brd)">450SX Main Event</div><table class="tbl"><tbody>'+podRow(d.r450,'')+'</tbody></table></div>'+
+        '<div><div style="padding:8px 14px;font-family:Oswald;font-size:10px;letter-spacing:1.5px;color:var(--yel);text-transform:uppercase;border-bottom:1px solid var(--brd)">250SX Main Event</div><table class="tbl"><tbody>'+podRow(d.r250,'')+'</tbody></table></div>'+
       '</div>'+
-      '<div style="padding:10px"><img src="'+mapBase+mapNames[n]+'" style="width:100%;border-radius:6px;border:1px solid var(--brd)"></div>'+
       '</div>';
   } else {
     var cities={6:'Seattle',7:'Arlington',8:'Daytona',9:'Indianapolis',10:'Birmingham',11:'Detroit',12:'St. Louis',13:'Nashville',14:'Foxborough',15:'Denver',16:'Salt Lake City',17:'Salt Lake City'};
+    var dates={6:'Feb 14',7:'Feb 22',8:'Mar 7',9:'Mar 14',10:'Mar 21',11:'Mar 28',12:'Apr 11',13:'Apr 18',14:'Apr 25',15:'May 2',16:'May 9',17:'May 16'};
+    var venues={6:'Climate Pledge Arena',7:'AT&T Stadium',8:'Daytona International Speedway',9:'Lucas Oil Stadium',10:'Protective Stadium',11:'Ford Field',12:'The Dome at America\'s Center',13:'Nissan Stadium',14:'Gillette Stadium',15:'Empower Field',16:'Rice-Eccles Stadium',17:'Rice-Eccles Stadium'};
+    var formats={7:'Triple Crown',14:'Triple Crown',17:'East/West Showdown'};
+    var wx=wxData[n]||{};
+    var fmtTag=formats[n]?'<span style="display:inline-block;background:var(--yel2);color:var(--yel);font-family:Oswald;font-size:9px;letter-spacing:1px;padding:2px 6px;border-radius:2px;margin-left:6px">'+formats[n].toUpperCase()+'</span>':'';
+    var wxHtml='';
+    if(wx.temp){
+      var isOutdoor=n===8||n===13||n===14||n===15||n===16||n===17;
+      wxHtml='<div style="padding:12px 14px;border-top:1px solid var(--brd)">'+
+        '<div style="font-family:Oswald;font-size:10px;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase;margin-bottom:6px">Weather Forecast</div>'+
+        '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">'+
+          '<span style="font-size:24px">'+wx.cond.split(' ')[0]+'</span>'+
+          '<div><div style="font-family:JetBrains Mono;font-size:16px;font-weight:700">'+wx.temp+'</div>'+
+          '<div style="font-family:Barlow;font-size:11px;color:var(--t3)">'+wx.cond.substring(wx.cond.indexOf(' ')+1)+'</div></div>'+
+        '</div>'+
+        '<div style="font-family:Barlow;font-size:12px;color:var(--t2)">'+wx.detail+'</div>'+
+        (isOutdoor?'<div style="margin-top:6px;font-family:Oswald;font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:2px;display:inline-block;background:rgba(255,34,68,0.15);color:var(--red)">⚠️ OUTDOOR VENUE — WEATHER AFFECTS RACING</div>':
+        '<div style="margin-top:6px;font-family:Oswald;font-size:9px;letter-spacing:1px;padding:3px 8px;border-radius:2px;display:inline-block;background:var(--grn2);color:var(--grn)">✓ INDOOR VENUE — NO WEATHER IMPACT</div>')+
+      '</div>';
+    }
     c.innerHTML=
-      '<div class="card" style="margin-top:8px"><div class="card-h"><div class="card-t">R'+n+' — '+(cities[n]||'TBD')+'</div><div class="tag" style="background:rgba(255,255,255,.05);color:var(--t3)">Upcoming</div></div>'+
-      '<div style="padding:14px"><img src="'+mapBase+mapNames[n]+'" style="width:100%;border-radius:6px;border:1px solid var(--brd)"></div>'+
+      '<div class="card" style="margin-top:8px"><div class="card-h"><div><div class="card-t">R'+n+' — '+(cities[n]||'TBD')+fmtTag+'</div><div class="card-s">'+(dates[n]||'')+' &middot; '+(venues[n]||'')+'</div></div><div class="tag" style="background:var(--overlay);color:var(--t3)">Upcoming</div></div>'+
+      wxHtml+
       '</div>';
   }
 }
-showRd(document.querySelector('.rb.active'),1);
+showRd(document.querySelector('.rb.active'),5);
 
-// TRACK MAP GRID
-var mg=document.getElementById('mapGrid');
-for(var i=1;i<=17;i++){
-  var isCurrent=i===5;
-  mg.innerHTML+='<div style="text-align:center'+(isCurrent?';border:2px solid #6cff00;border-radius:6px;padding:2px':'')+'"><img src="'+mapBase+mapNames[i]+'" alt="R'+i+'"><div style="font-family:Barlow Condensed;font-size:10px;color:'+(isCurrent?'#6cff00':'#5a5c68')+';margin-top:3px">R'+i+'</div></div>';
+function toggleTheme(){
+  document.body.classList.toggle('light');
+  var isLight=document.body.classList.contains('light');
+  document.querySelector('.theme-btn').textContent=isLight?'☀️':'🌙';
+  localStorage.setItem('smx-theme',isLight?'light':'dark');
 }
+(function(){var t=localStorage.getItem('smx-theme');if(t==='light'){document.body.classList.add('light');document.querySelector('.theme-btn').textContent='☀️';}})();
 </script>
 </body>
 </html>
